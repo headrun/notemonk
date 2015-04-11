@@ -1,0 +1,10 @@
+{% extends "ui/user_base.html" %}
+
+{% load filters %}
+{% load tags %}
+
+{% block listing %}
+    {% for item in stream.object_list %}
+        {% render item 'image,-text,more,bcard' %}
+    {% endfor %}
+{% endblock listing %}

@@ -1,0 +1,6 @@
+{{user.get_profile.title}} rated "{{ rating }}"
+
+for "{{rate_obj.title}}"
+
+To rate this click here:
+http://{{ current_site }}{{rate_obj.link}}

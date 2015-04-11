@@ -1,0 +1,12 @@
+{% load tags %}
+{% load filters %}
+
+<a href="{{ obj.link }}">{{ obj.title }}</a>
+{% if obj.activity_count %}
+&nbsp;
+<a href="{{ obj.link }}" title="{{ obj.activity_count }} activities on this topic">
+<font class="node-activities node-activities-{% if obj.activity_count|gt:20 %}dark{% else %}light{% endif %}">
+    {{ obj.activity_count }}
+</font>
+</a>
+{% endif %}

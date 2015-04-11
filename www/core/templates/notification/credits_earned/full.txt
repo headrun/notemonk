@@ -1,0 +1,9 @@
+{{ credits }} credits have been added to your account! Congrats!
+
+You can redeem your credits here,
+http://{{ current_site}}/redeem/
+
+Review your profile information here,
+http://{{ current_site }}{{ user.get_profile.link }}
+
+You have a total of {{ user.get_profile.credits }} credits.

@@ -1,0 +1,31 @@
+{% extends "ui/base.html" %}
+{% load tags %}
+
+{% block title %}
+<span class="title">Invite Friends - Notemonk</span>
+{% endblock title %}
+
+{% block content %}
+
+    <form action="/invite/" method="POST">
+        <table width="100%" class="form">
+            {{ form.as_table }}
+        </table>
+        <input type="hidden" name="ref_path" value="{{ next }}" />
+        <div align="center">
+            <input type="submit" value="Invite"/>
+        </div>
+    </form>
+
+{% endblock content %}
+
+{% block sidebar %}
+    Tell your friends about Notemonk. You can
+    <ul>
+        <li>Ask them questions and get relevant answers.
+        <li>Get them to share notes with you.
+        <li>Follow their activities on Notemonk.
+        <li>Earn points as they progress in Notemonk.
+    </ul>
+
+{% endblock sidebar %}

@@ -1,0 +1,30 @@
+{% extends "ui/base.html" %}
+
+{% load tags %}
+{% load filters %}
+
+{% block title %}
+    <div class="grid_11 alpha">
+        <span class="title">Revision: {{ version.revision.comment }}</span><br/>
+        on public notes of 
+        <span class="subtitle">
+            {{ note.target.title }}
+        </span><br/>
+        created {{ version.revision.date_created|dt }} by 
+        {% render version.revision.user.get_profile %}
+    </div>
+{% endblock title %}
+
+{% block content %}
+    <div class="note">
+        {{ version.field_dict.text }}
+    </div>
+    
+    <form style="display:none" name="revision_{{ version.id }}" action="/note/{{ note.id }}/revision/{{ version.id }}/revert/" method="POST">
+        <input type="hidden" name="ref_path" value="{{ note.target.link }}">
+    </form>
+
+    <div align="right">
+        <a href="#" onclick="javascript:document.forms['revision_{{ version.id }}'].submit();return false;">revert to this version</a>
+    </div>
+{% endblock content %}

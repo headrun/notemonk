@@ -1,0 +1,16 @@
+{% load tags %}
+{% load filters %}
+
+<span class="comment">
+{% if flags.is_image %}
+    <span style="float:left">{% render obj.user.get_profile 'image,-text' %}</span>
+{% endif %}
+<div style="margin-left:37px;padding-bottom:2px;margin-bottom:2px;border-bottom:1px solid #e8e8e8">
+{% if flags.is_dateadded %}
+<span style="float:right">{{ obj.date_added|dt }}</span>
+{% endif %}
+<span>{% render obj.user.get_profile %}</span>
+</div>
+<div style="margin-left:37px"> {{ obj.text }}</div>
+
+</span>

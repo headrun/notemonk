@@ -1,0 +1,43 @@
+{% load tags %}
+{% load filters %}
+
+{% if not flags.is_more %}
+
+    {% if flags.is_image %}
+    <div style="float: left;">
+        <a href="{{ obj.link }}">
+            <img src="{{ obj.image|thumbnail:'100x100' }}"/>
+        </a>&nbsp;&nbsp;&nbsp;
+    </div>
+    {% endif %}
+    <a href="{{ obj.link }}">
+        {{ obj.title }}
+    </a>
+
+{% else %}
+
+    <div style="float: left;">
+        <a href="{{ obj.link }}">
+            <img src="{{ obj.image|thumbnail:'100x100' }}"/>
+        </a>&nbsp;&nbsp;&nbsp;
+    </div>
+
+    <div style="padding: 5px;">
+        <a href="{{ obj.link }}">
+            <span class="subtitle">{{ obj.title }}</span>
+        </a>
+        {% if obj.num %}
+        (<a href="/cart/add/{{ obj.id }}/?next={{ ref_path }}">add to cart</a>)
+        {% endif %}
+        <br/>
+
+        <big><strong>{{ obj.credits }}</strong></big> credits,
+        <big><strong>{{ obj.num }}</strong></big> available
+        <br/>
+
+        {{ obj.description }}
+    </div>
+
+{% endif %}
+
+

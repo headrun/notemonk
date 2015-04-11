@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+{% load tags %}
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:fb="http://ogp.me/ns/fb#"">
+
+    <head>
+        <title>{{ page_title }}</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="description" content="Notemonk is an exciting new way to experience books. An easy to use webtool helping students to prepare better by downloading books, taking notes, sharing questions, watching related videos and collaborating with their peers."/>
+        <meta name="keywords" content="text books, notemonk, notes, download books, e-learning, easy learning, ncert, take notes, download ncert books, prepare notes, educational site, ask questions, school books, free textbooks, cbse books, 9th standard ebooks, 10th standard ebooks, 11th standard ebooks, 12th standard ebooks, acharya nagarjuna university, anu, ipe, eamcet, tamil nadu books"/>
+
+        <link rel="stylesheet" href="/static/css/main.css"></link>
+        <link rel="stylesheet" href="/static/css/960.css"></link>
+        <link rel="stylesheet" href="/static/css/bootstrap.css"></link>
+        <link rel="stylesheet" href="/static/css/ui-lightness/jquery-ui-1.7.2.custom.css"></link>
+        <link rel="stylesheet" href="http://static.ak.connect.facebook.com/connect.php/en_US/css/connect-button-css/bookmark-button-css/share-button-css/FB.Connect-css/connect-css"></link>
+	<link rel="stylesheet" href="/static/css/token-input-facebook.css"></link>
+
+        <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="/static/js/jquery-ui-1.7.2.custom.min.js"></script>
+
+        <script type="text/javascript" src="/static/js/jquery.corners.min.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.elastic.js"></script>
+	 <script type="text/javascript" src="/static/js/jquery.tokeninput.js"></script>
+        <script type="text/javascript" src="/static/js/bootstrap-modal.js"></script>
+	<!-- <script type="text/javascript" src="/static/js/jquery.autoSuggest.js"></script>-->
+        <script type="text/javascript" src="/static/js/json2.js"></script>
+
+        <script type="text/javascript" src="/static/js/captify.tiny.js"></script>
+        <script type="text/javascript" src="/static/js/jstree/jquery.tree.js"></script>
+        <script type="text/javascript" src="/static/js/jstree/plugins/jquery.tree.contextmenu.js"></script>
+        <script type="text/javascript" src="/static/js/jstree/lib/jquery.hotkeys.js"></script>
+        <script type="text/javascript" src="/static/js/jstree/plugins/jquery.tree.hotkeys.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.json-2.3.js"></script>
+
+        <script type="text/javascript" src="/static/js/main.js"></script>
+
+        <script type='text/javascript'>
+            var googletag = googletag || {};
+            googletag.cmd = googletag.cmd || [];
+            (function() {
+            var gads = document.createElement('script');
+            gads.async = true;
+            gads.type = 'text/javascript';
+            var useSSL = 'https:' == document.location.protocol;
+            gads.src = (useSSL ? 'https:' : 'http:') +
+            '//www.googletagservices.com/tag/js/gpt.js';
+            var node = document.getElementsByTagName('script')[0];
+            node.parentNode.insertBefore(gads, node);
+            })();
+            </script>
+
+            <script type='text/javascript'>
+            googletag.cmd.push(function() {
+            googletag.defineSlot('/15156898/medium_rectangle', [300, 250], 'div-gpt-ad-1319891242082-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+            });
+        </script>
+
+        <script type="text/javascript">
+
+            $(document).ready(function(){
+		    initialize();
+                {% block jsinit %}
+                {% endblock %}
+            })
+
+
+        </script>
+
+        {% load markitup_tags %}
+        {% markitup_media "no-jquery" %}
+
+        <!-- Place this tag in the <head> of your document-->
+        <link href="https://plus.google.com/103712232789698401189" rel="publisher" />
+	<script type="text/javascript">
+        (function()
+        {var po = document.createElement("script");
+        po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(po, s);
+        })();</script>
+
+    </head>
+
+    <body>
+
+<!-- script to render background ad -->
+
+    {% block bad %}
+    {% endblock %}
+
+<!-- end script to render background ad -->
+
+     	<div id="header-container" style="">
+         <!-- Header Bar -->
+         <div style="display:table-cell;vertical-align:middle">
+            <div class="container_16" style="display:table;width:980px;height:43px;" >
+                <span class="logo">
+                    <a href="/" rel="nofollow">
+                        <img alt="Notemonk" src="/static/images/nm_logo2.png" title="Notemonk Home"/>
+                    </a>
+                </span>
+               <div style="display:table-cell;vertical-align:middle">
+                <div class="actionbar">
+                    {% if user.is_authenticated %}
+                    <div style="float: none;display:table-cell;vertical-align:middle;">
+                    {% render user.get_profile 'image,-text,-more,newlook' %}
+                    </div>
+                    {% endif %}
+
+                    <div style="float: none;display:table-cell;vertical-align:middle">
+                        {% if user.is_authenticated %}
+                            <div align="center">
+                       <!--    {% button '{{ user.get_profile.link }}' 'color=E8E6DF' 'hcolor=F2F0E9' 'title={{ user.get_profile.title }}' %}-->
+                            <a href="{{ user.get_profile.link }}" style="color:white;"><strong><big>{{ user.get_profile.title }}</big></strong></a>
+                         <!--    {{ user.get_profile.level_name }} ({{ user.get_profile.level }}) - {{ user.get_profile.points }}/{{ user.get_profile.points_for_current_level }}  -->
+                       <!--     {% endbutton %} -->
+                            </div>
+                        {% endif %}
+                    </div><div style="display:table-cell;float:none;vertical-align:middle">
+                        <div style="padding-right:0px !important">
+                            {% if user.is_authenticated %}
+                          <!--  {% button '/logout/' 'color=635337' 'hcolor=8A734C' 'title=Done for the day?' %} -->
+                                <a href="/logout/" title="Done for the day?"><strong>Logout</strong></a>
+                           <!--  {% endbutton %}  -->
+                            {% else %}
+                            <a href='{% url socialauth_begin "facebook" %}'><img style='vertical-align:bottom' src='/static/images/fblogin.png'/></a>
+                            <!-- {% button '/login/?next={{ ref_path }}' 'color=635337' 'hcolor=8A734C' 'title=Login to do more' %} -->
+                               <a href="/login/?next={{ ref_path }}" title="Login to do more"><strong>Login</strong></a>
+                           <!--  {% endbutton %} -->
+                            {% endif %}
+
+                         <!--   {% if user.get_profile.can_add_book %}-->
+                           <!--  {% button '/book/add/' 'color=635337' 'hcolor=8A734C' 'title=Add your own book' %} -->
+                                <!-- <a href="/book/add/" title="Add your own book"><strong>Add book</strong></a> -->
+                           <!--  {% endbutton %} -->
+                           <!--  {% endif %} -->
+                            <!-- {% button '/invite?ref_path={{ ref_path }}' 'color=635337' 'hcolor=8A734C' 'title=Invite your friends' %} -->
+                             <!--    <a href="/invite?ref_path={{ ref_path }}" title="Invite your friends"><strong>Invite</strong></a> -->
+                            <!-- {% endbutton %} -->
+                            <!-- {% button '/feedback/' 'color=635337' 'hcolor=8A734C' 'title=Give your feedback!' %} -->
+                            <!--     <a href="/feedback/" title="Give your feedback!"><strong>Feedback</strong></a> -->
+                            <!-- {% endbutton %} -->
+                            <!-- &nbsp; -->
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        </div>
+        <div style="widt:100%;overflow:hidden;margin:0px 0px 40px 0px;background:rgba(17,17,17,0.4)">
+        <div class="container_16" style="overflow:hidden;width:980px !important">
+
+        <div id="main-nav" class="grid_16 alpha omega" style="display:table;margin-left:auto;margin-right:auto;float:none">
+        <div class="" style="display:table-cell;vertical-align:middle;float:none;background:url('/static/images/arrow.png') top right no-repeat;padding-right:20px"><strong style="color:#99E6FF">Books</strong></div>
+        <ul id="list-books" class="grid_11 alpha omega hul" style="border:none;display:table-cell;vertical-align:middle">
+            <li><a href="/ncert/" title="ALL NCERT BOOKS"><strong>NCERT</strong></a></li>
+            <li><a href="/cbse_books/" title="CBSE Books"><strong>CBSE</strong></a></li>
+            <li><a href="/aieee_books/" title="AIEEE Books"><strong>AIEEE</strong></a></li>
+            <li><a href="/iitjee_books/" title="IITJEE Books"><strong>IITJEE</strong></a></li>
+            <li><a href="/tamilnadu/" title="Tamilnadu Books"><strong>Tamilnadu</strong></a></li>
+            <li><a href="/bits_msss/" title="BITS PILANI MSSS Books"><strong>BITS MSSS</strong></a></li>
+            <li><a href="/anu_books/" title="Acharya Nagarjuna University"><strong>ANU</strong></a></li>
+            <li><a href="/ipe_books/" title="Andhra Pradesh Intermediate Books"><strong>IPE</strong></a></li>
+            <li><a href="/upsc_books/" title="Andhra Pradesh Intermediate Books"><strong>UPSC</strong></a></li>
+        </ul>
+	{% if user.is_authenticated %}
+	<ul class="hul" style="float:right;margin-right:-25px">
+		<li><a href="/book/add/" title="Add your own book"><strong>Add book</strong></a> </li>
+		<li><a href="/invite?ref_path={{ ref_path }}" title="Invite your friends"><strong>Invite</strong></a></li>
+		<li><a href="/feedback/" title="Give your feedback!"><strong>Feedback</strong></a></li>
+	</ul>
+	{% endif %}
+        </div>
+        </div>
+        </div>
+        <script src="http://static.ak.connect.facebook.com/connect.php/en_US" type="text/javascript"></script><script type="text/javascript">FB.init("7703fdc51bb3335309922341cdb1ec0f");</script>
+        <div class="container_16 roundedges" style="padding: 10px;margin-bottom: 10px;padding-bottom: 20px;position: relative;">
+
+
+
+           <!-- <div class="grid_16 alpha"><br/></div> -->
+
+            {% if error %}
+               <script> alert("{{error}}");</script>
+            <!--<div class="grid_16 alpha"><br/></div>
+
+            <div class="grid_16 alpha omega emphasize">
+            <big>
+                <big>
+                    {{ error }}
+                </big>
+                </big>
+                </div>
+           -->
+           <!--  <div class="grid_16 alpha"><br/></div> -->
+            {% endif %}
+
+            <!-- Content Layout -->
+            <div  class="grid_16 content roundedges" style="overflow:hidden">
+
+                <div id="stream" class="grid_11 alpha omega title_block roundedges" style="">
+                    {% block title %}{% endblock %}
+                    {% block content %}{% endblock %}
+                </div>
+
+                <!-- <div class="grid_11 alpha roundedges" style="background:white;margin:-10px 0px 0px -10px;padding:10px">
+                </div> -->
+
+                <div id="sidebar"  class="grid_5 omega roundedges">
+                    {% block sidebar %}{% endblock %}
+                </div>
+            </div>
+
+            <script>
+                $(".tag").click(function(){
+                    window.location="/tag/"+$(this).text();
+                });
+            </script>
+
+            <div class="grid_16 alpha"><br/></div>
+
+            <div id="footer" class="grid_16 alpha omega" style="color:white;font-size:1.2em" align="center">
+                {% block footer %}
+                &copy; Headrun 2012 - <a href="/feedback/">feedback</a>-<a href="http://notemonk.com/privacy_policy/">privacy policy</a>
+                {% include "ui/debug.html" %}
+                {% endblock %}
+            </div>
+
+            {% if book %}
+                {% background_ad book %}
+
+            {% else %}
+
+                {% if node and node.book %}
+                    {% background_ad node.book %}
+
+                {% else %}
+                    {% if attachment and attachment.is_target_book %}
+                        {% background_ad attachment.target %}
+
+                    {% else %}
+                        {% if attachments and target.ctype.name == "book" %}
+                            {% background_ad target %}
+
+                        {% else %}
+                            {% if questions and target.ctype.name == "book" %}
+                                {% background_ad target %}
+
+                            {% else %}
+                                {% if question and question.target.book %}
+                                    {% background_ad question.target.book %}
+
+                                {% else %}
+                                    {% if videos and target.book %}
+                                        {% background_ad target.book %}
+
+                                    {% else %}
+                                        <script>
+                                            console.log("video----> {{avideo.target.book}}");
+                                        </script>
+                                        {% if avideo and avideo.target.book %}
+                                            {% background_ad avideo.target.book %}
+
+                                        {% endif %}
+
+                                    {% endif %}
+
+                                {% endif%}
+
+                            {% endif %}
+
+                        {% endif%}
+
+                    {% endif %}
+
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+    </body>
+            <!-- Start Alexa Certify Javascript -->
+            <script type="text/javascript" src="https://d31qbv1cthcecs.cloudfront.net/atrk.js"></script>
+            <script type="text/javascript">_atrk_opts = { atrk_acct: "02xUe1akRA00yb", domain:"notemonk.com"}; atrk ();</script>
+            <noscript>
+                <img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=02xUe1akRA00yb" style="display:none" height="1" width="1" alt="" />
+            </noscript>
+            <!-- End Alexa Certify Javascript -->
+       <!-- Google Analytics Tracking Code -->
+        <script type="text/javascript">
+
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-2476413-7']);
+          _gaq.push(['_setDomainName', '.notemonk.com']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+
+        </script>
+</html>

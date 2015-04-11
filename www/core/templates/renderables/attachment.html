@@ -1,0 +1,37 @@
+{% load tags %}
+{% load filters %}
+
+{% if not flags.is_more %}
+
+    <a href="{{ obj.link }}">{{ obj.title }}</a>
+
+{% else %}
+
+    <a href="{{ obj.link }}">{{ obj.title }}</a> {% rate obj %} {% flag obj %}
+    <br/>
+    {% if obj.description %}
+        {{ obj.description|brief:'500' }}<br/>
+    {% endif %}
+
+    for <a href="{{ obj.target.link }}">{{ obj.target.title }}</a>
+    
+    {% if flags.is_dateadded %}
+        added {{ obj.date_added|dt }}
+    {% endif %}
+    
+    {% if flags.is_addedby %}
+        by {% render obj.attacher.get_profile %}
+    {% endif %}
+    
+    <br/>
+    <a class='label' href="{% if obj.url %}{{ obj.url }}{% else %}{{ obj.uploaded_file.file.url }}{% endif %}" style="text-decoration: none;background: #08C !important;padding:5px; margin-right:5px;">Download
+        <!--<img src="/static/images/download.png" alt="Download" title="Download"/>-->
+    </a>
+
+    {% if obj.url %}
+        {% preview_attachment obj.url %}
+    {% else %}
+        {% preview_attachment obj.uploaded_file.file.url %}
+    {% endif %}
+
+{% endif %}

@@ -1,0 +1,76 @@
+{% load tags %}
+{% load filters %}
+
+{% if flags.is_instream %}
+    <div style="display:table">
+        <div style="display:table-row" class="streammainfo">
+    	    <strong>Q.</strong>
+    	    <a href="{{ obj.link }}">{{ obj.text|striptags|truncatesmart:'200' }}</a>
+	</div>
+	<div  style="margin-left:1px">
+   {% if flags.is_context %}
+         <div class="streamexinfo" style=""><span>under </span><a href="{{ obj.target.link }}" title="{{ obj.target.title }}">{{ obj.target.title|truncatesmart:'25' }}</a></div>
+    {% endif %}
+
+    {% if flags.is_dateadded %}
+        <div style=""><span>{% if flags.is_rate %}{% rate obj %}{% endif %} . </span><a href="{{ obj.target.link }}">answer</a></div>
+    {% endif %}
+    </div>
+  </div>
+{% else %}
+{% if not flags.is_more %}
+
+    <strong>Q.</strong>
+    <a href="{{ obj.link }}">{{ obj.text|striptags|truncatesmart:'50' }}</a>
+
+    {% if flags.is_dateadded %}
+        {{ obj.date_added|dt }}
+    {% endif %}
+
+    {% if flags.is_context %}
+        under <a href="{{ obj.target.link }}" title="{{ obj.target.title }}">{{ obj.target.title|truncatesmart:'25' }}</a>
+    {% endif %}
+
+{% else %}
+    {% if flags.is_addedby %}
+       <div> {% render obj.user.get_profile 'image,text,-more'%}</div>
+        <br/>
+   {% endif %}
+    <div style="margin-left:0px">
+    <div>
+    <strong><big>Q.</big></strong>
+    <a href="{{ obj.link }}">{{ obj.text|brief:'200' }}</a>
+    <span class="light">
+    {% if flags.is_rate %}
+        {% rate obj %}
+    {% endif %}
+   
+    {% if flags.is_flag %}
+        {% flag obj %}
+    {% endif %}
+
+    {% if flags.is_answercount %}
+        <br/><span><span class="{% if not obj.answer_set.count %}alert-emphasize{% endif %}">{{ obj.answer_set.count }} answer{{ obj.answer_set.count|pluralize }}</span>
+    {% endif %}
+
+    {% if flags.is_context %}
+        under <a href="{{ obj.target.link }}" title="{{ obj.target.title }}">{{ obj.target.title|truncatesmart:'25' }}</a></span>
+    {% endif %}
+    
+
+
+    {% if flags.is_dateadded %}
+        {{ obj.date_added|dt }}
+    {% endif %}
+    </span>
+    </div>
+    {% if flags.is_topanswer %}
+        {% if obj.top_answer %}
+            <br/>
+            <div>{% render obj.top_answer '-context' %}</div>
+        {% endif %}
+    {% endif %}
+    </div>
+{% endif %}
+<a href="{{ obj.target.link }}">answer</a>
+{% endif %}

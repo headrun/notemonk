@@ -1,0 +1,23 @@
+{% extends "renderables/group_base.html" %}
+
+{% load tags %}
+{% load filters %}
+
+{% block digest %}
+    {% for user, points in groups %}
+       <span class="roundedges" style="float:left;padding:5px;background:#F5F5F5;border:1px solid #e3e3e3;margin:0px 5px;"><span style="float:left;padding-right:5px"> {% render user.get_profile 'image,-text,-more' %}  {% render user.get_profile '-image,text,-more' %}<br/>
+	<span>
+        {% for point in points %}
+
+            <span style="font-weight:bold" class="points-{% if point.target.has_gained %}gained{% else %}lost{% endif %}"
+                  title="{{ point.target.title }}">
+            {{ point.target.signed_points }}
+            </span>
+
+            {% if not forloop.last %}, {% endif %}
+        {% endfor %}
+	</span>
+	</span>
+	</span>
+    {% endfor %}
+{% endblock digest %}

@@ -1,0 +1,34 @@
+{% load tags %}
+{% load filters %}
+
+{% if flags.is_more %}
+    <strong>Note:</strong><br/><a href="{{ obj.link }}">{{ obj.target.title|truncatesmart:'50' }}</a><br/>
+    {{ obj.text|brief:'300' }}
+
+    <span class="light">
+    {% if flags.is_rate %}
+        {% rate obj %}
+    {% endif %}
+
+    {% if flags.is_flag %}
+        {% flag obj %}
+    {% endif %}
+
+    {% if flags.is_context %}
+    under <a href="{{ obj.target.link }}">{{ obj.target.title|truncatewords:5 }}</a>
+    {% endif %}
+    </span>
+
+{% else %}
+    <a href="{{ obj.link }}">{{ obj.target.title|truncatesmart:'50' }}</a>
+{% endif %}
+
+<span class="light">
+{% if flags.is_addedby %}
+by {% render obj.user.get_profile %}
+{% endif %}
+
+{% if flags.is_dateadded %}
+    written {{ obj.date_added|dt }}
+{% endif %}
+</span>

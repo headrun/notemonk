@@ -1,0 +1,160 @@
+{% extends "ui/base.html" %}
+
+{% load tags %}
+{% load filters %}
+
+{% block title %}
+
+<script type="text/javascript">
+window.google_analytics_uacct = "UA-2476413-7";
+</script>
+
+
+  <meta property="fb:app_id"      content="356589223428" /> 
+  <meta property="og:type"        content="book" /> 
+  <meta property="og:url"         content="{{ book.link }}" /> 
+  <meta property="og:title"       content="{{ book.title }}" /> 
+  <meta property="og:description" content="{{ book.title }}" /> 
+  <meta property="og:image"       content="{{ book.cover_image|thumbnail:'150x150' }}" /> 
+
+<div class="grid_11 alpha">
+    <span class="title">{{book.title}}</span>&nbsp;
+    (<span>{% rate book %}, </span>
+     <span>{% follow book %}</span>
+     <span>{% flag book %}</span>)
+
+    <!-- Facebook share -->
+    <div style="float: right; position: relative; top: 5px;">
+        <a name="fb_share" type="button_count" href="http://www.facebook.com/sharer.php">Share</a>
+        <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+    </div>
+
+    {% if is_editable %}
+    <div style="float: right; position: relative; top: 7px;">
+        <a href="{{ book.edit_link }}" class="button">
+            <img src="/static/images/edit.png"/>
+        </a>
+        &nbsp;
+    </div>
+    {% endif %}
+
+    {% if book.attachments.all %}
+    <div style="float: right; position: relative; top: 7px;">
+        <a href="{{ book.attachments_link }}" class="button">
+            <img src="/static/images/download.png"/>
+        </a>
+        &nbsp;
+    </div>
+    {% endif %}
+
+    <div>{{ bread_crumbs|safe }}</div>
+</div>
+
+{% endblock title %}
+
+{% block content %}
+
+<br/>
+{% note book %}
+
+<div class="grid_11 alpha">
+{% for subtopic in subtopics %}
+    <div>
+        {% render subtopic %}
+    </div>
+    <div class="hrdiv"></div>
+    {% if subtopic.subnodes %}
+        <div class="grid_11 alpha">
+        <ul>
+        {% for snode in subtopic.subnodes %}
+            {% outline snode 1 %}
+        {% endfor %}
+        </ul>
+        </div>
+    {% endif %}
+{% endfor %}
+</div>
+
+<div class="grid_11 alpha"><br/></div>
+
+{% endblock content %}
+
+{% block sidebar %}
+    
+    <center>
+    <div class="grid_5 alpha omega">
+    
+        <a href="{% if book.file %}{{ book.file.url }}{% else %}/book/{{ book.id }}/{{ book.title }}/{% endif %}">
+            <img alt="{{ book.title }}"
+                 src="{{ book.cover_image|thumbnail:'150x150' }}"
+                 class="book_thumb"/>
+        </a>
+
+        {% if book.isbn %}
+           <br/><br/>
+           ISBN: {{ book.isbn }}
+        {% endif %}
+
+        <br/><br/>
+        {% if book.tags.all %}	
+            {% for t in book.tags.all %}
+                <span class="tag"><a href="/books/tag/all/{{t.tag.name}}">{{ t.tag.name }}</a></span>
+            {% endfor %}
+        {% endif %}
+
+    </div>
+
+    <div class="grid_11 alpha"><br/></div>
+    
+    <div class="grid_5 alpha omega">
+        <div>
+            {% render book.user.get_profile 'image,-text,more' %}
+        </div>
+       
+        <div>
+        {% if book.moderators.all.count %}
+            {% for m in book.moderators.all|slice:'8' %}
+                {% render m.get_profile 'image,-text' %}
+            {% endfor %}
+        {% endif %}
+        </div>
+       
+        <div class="grid_5 alpha omega">
+        {% if book.moderators.all.count %}
+            <a href="{{ book.moderators_link }}">see all moderators</a>,
+        {% endif %}
+        <a href="{{ book.request_moderation_link }}">become moderator</a>
+        </div>
+        <div class="grid_5 alpha omega hrdiv"></div>
+    </div>
+
+    <div class="grid_11 alpha"><br/></div>
+
+    {% if book.followers.all %}
+    <div class="grid_5 alpha omega">
+        {% for f in book.followers.all|slice:'8' %}
+            {% render f.user.get_profile 'image,-text' %}
+        {% endfor %}
+    </div>
+     <div style="text-align:center"><a href="{{ book.followers_link }}">see all followers</a></div>
+    <div class="grid_5 alpha omega hrdiv"></div>
+
+    <div class="grid_11 alpha"><br/></div>
+    {% endif %}
+   
+    <div class="grid_5 alpha omega">
+    {% attachments book 5 %}
+    </div>
+    <div class="grid_5 alpha omega"><br/></div>
+   <div class="grid_5 alpha omega"><br/></div>
+   <div class="grid_5 alpha" style="margin-left:-10px">
+    <!-- medium_rectangle -->
+        <div id='div-gpt-ad-1319891242082-0' style='width:300px; height:250px;'>
+            <script type='text/javascript'>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1319891242082-0'); });
+            </script>
+        </div>
+    </div>
+
+    </center>
+{% endblock sidebar %}

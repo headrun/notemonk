@@ -1,0 +1,55 @@
+{% extends "ui/base.html" %}
+
+{% load tags %}
+
+{% block title %}
+
+<span class="title">
+{{ title }}<a href="{{ target.link }}">{{ target.title }}</a>
+</span>
+(
+
+{% if can_rate_or_flag %}
+<span>{% rate target %}, </span>
+{% endif %}
+
+{% if can_follow %}
+<span>{% follow target %}</span>
+{% endif %}
+
+{% if can_rate_or_flag %}
+<span>, {% flag target %}</span>
+{% endif %}
+
+)
+{% endblock title %}
+
+{% block content %}
+<br>
+{% for auser in users.object_list %}
+
+<div class="grid_11 alpha">
+    {% render auser.user.get_profile 'image,more' %}
+</div>
+<div class="grid_11 alpha hrdiv"></div>
+<div class="grid_11 alpha"><br/></div>
+
+{% endfor %}
+
+<div class="grid_11 alpha">
+    {% paginator users paging_url %}
+</div>
+
+{% endblock content %}
+
+{% block sidebar %}
+    <div class="grid_5 alpha" style="margin-left:-10px">
+       <!-- End: adBrite -->
+        <div id='div-gpt-ad-1319891242082-0' style='width:300px; height:250px;'>
+            <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1319891242082-0'); });
+            </script>
+        </div>
+    </div>
+
+{% endblock sidebar %}

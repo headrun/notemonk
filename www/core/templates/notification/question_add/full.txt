@@ -1,0 +1,8 @@
+{{ user.get_profile.title }} asked question
+
+"{{ question.text|striptags }}"
+
+about "{{question.target.title}}"
+
+Answer this question by clicking the following link:
+http://{{ current_site }}{{question.link}}

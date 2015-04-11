@@ -1,0 +1,9 @@
+Note for "{{note.target.title}}" updated to
+
+Note:
+{{note.text.raw}}
+
+by {{user.get_profile.title}}
+
+Read the note by clicking the below link:
+http://{{ current_site }}{{note.link}}

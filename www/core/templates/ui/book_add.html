@@ -1,0 +1,42 @@
+{% extends "ui/base.html" %}
+
+{% load tags %}
+
+{% block jsinit %}
+
+$('#id_tags').tokenInput('/tags/',{theme:"facebook",crossDomain:true});
+
+{% endblock jsinit %}
+
+
+{% block title %}
+
+<div class="grid_11 alpha">
+    <span class="title">Add new book</span>
+</div>
+
+{% endblock title %}
+
+{% block content %}
+
+<br/>
+
+<div class="grid_11 alpha">
+    <form action="/book/add/" method="POST">
+        <table width="100%" class="form">
+            {{ form.as_table }}
+            <tr>
+                <td></td>
+                <td>
+                    <input style="width:50px;height:25px" type="submit" value="Add"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+{% endblock content %}
+
+{% block sidebar %}
+   
+{% endblock sidebar %}

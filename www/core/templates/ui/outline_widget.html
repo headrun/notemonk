@@ -1,0 +1,11 @@
+{% load tags %}
+<li>
+    {% render node %}
+    {% if subnodes %}
+    <ul>
+    {% for snode in subnodes %}
+        {% outline snode depth %}
+    {% endfor %}
+    </ul>
+    {% endif %}
+</li>

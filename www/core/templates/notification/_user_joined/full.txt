@@ -1,0 +1,2 @@
+{{ user.username }} joined on {{user.date_joined}}
+http://{{ current_site }}{{ user.get_profile.link }}

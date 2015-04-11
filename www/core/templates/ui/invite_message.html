@@ -1,0 +1,17 @@
+Hi,
+I am trying to become a monk. I need help. Come join in.
+{% if message %}
+
+{{ message }}
+{% endif %}
+
+Notemonk is an exciting new way to learn our textbooks. We can collect notes together
+for easy reference. There are tons of useful videos related to the topics in our
+textbooks.
+
+Come join me http://www.notemonk.com/accounts/register/?referrer={{user.username}}
+(if you cannot click on the above link, copy and paste it in the browser)
+
+regards,
+{{user.get_profile.title}}
+{{user.get_profile.level_name}} with {{user.get_profile.points}} points at notemonk.com

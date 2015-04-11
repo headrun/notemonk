@@ -1,0 +1,5 @@
+{% load tags %}
+{% load filters %}
+
+<a class="username" href="{{ obj.user.get_profile.link }}">{{ obj.user.get_profile.title }}</a> is now following {% render obj.target %}
+{{ obj.date_added|dt }}

@@ -1,0 +1,9 @@
+{{ feedback }}
+
+from,
+{% if user.is_authenticated %}
+{{ user.get_profile.title }} ({{ user.username }}, {{ user.email }})
+http://{{ current_site }}{{ user.get_profile.link }}
+{% else %}
+{{ name }} ({{ email }})
+{% endif %}

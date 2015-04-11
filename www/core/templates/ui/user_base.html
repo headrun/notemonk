@@ -1,0 +1,202 @@
+{% extends "ui/base.html" %}
+
+{% load filters %}
+{% load tags %}
+
+{% block title %}
+
+  <meta property="fb:app_id"      content="356589223428" /> 
+  <meta property="og:type"        content="profile" /> 
+  <meta property="og:url"         content="{{ page_user.get_profile.link }}" /> 
+  <meta property="og:title"       content="{{ page_user.get_full_name }}" /> 
+  <meta property="og:description" content="Profile of {{ page_user.get_full_name }}" /> 
+  <meta property="og:image"       content="{{ page_user.get_profile.image }}" /> 
+
+
+{% if page_user %}
+<div class="grid_11 alpha">
+    <span class="title"><a href="{{ page_user.get_profile.link }}">{{ page_user.get_full_name }} ({{page_user.username}})</a></span>
+    (<span>{% rate page_user.get_profile %}, </span>
+    <span>{% follow page_user.get_profile %}, </span>
+    <span>{% flag page_user.get_profile %}</span>)
+    <br/>
+    {% if page_user.get_profile.location %}
+    from <i>{{ page_user.get_profile.location }}</i>,
+    {% endif %}
+    {% if page_user.get_profile.institution %}
+    affiliated to <i>{{ page_user.get_profile.institution }}</i>,
+    {% endif %}
+    joined {{ page_user.date_joined|dt }}
+    <br/>
+</div>
+
+{% ifequal user.username page_user.username %}
+<div class="grid_5 omega">
+    <a href="/user/edit/">
+        <img src="/static/images/edit.png" alt="edit"/>
+    </a>
+</div>
+{% endifequal %}
+{% endif %}
+
+{% endblock title %}
+
+
+{% block content %}
+
+    <div class="grid_11 alpha"><br/></div>
+    <div class="grid_11 alpha">
+    {% profilepost page_user.get_profile page_user.get_profile.title 0 %}
+    </div>
+    <div class="grid_11 alpha"><br/></div>
+
+    <div class="grid_11 alpha">
+        {% block listing %}
+        {% endblock %}
+    </div>
+
+    <div class="grid_11 alpha"><br/></div>
+   
+    {% block pagination %}
+    <div class="grid_11 alpha">
+        {% paginator stream paging_url %}
+    </div>
+    {% endblock %}
+
+{% endblock content %}
+
+
+{% block sidebar %}
+
+    <center>
+        {% if page_user.get_profile.image %}
+        <img src="{{ page_user.get_profile.image|thumbnail:'200x200' }}"/>
+        {% else %}
+        <img src="{{ '/static/images/user.png'|thumbnail:'200x200' }}"/>
+        {% endif %}
+    </center>
+    
+    {% if page_user.get_profile.note.text.raw %}
+    <div class="note">
+        {{ page_user.get_profile.note.text }}
+    </div>
+    <div class="grid_11 alpha"><br/></div>
+    {% endif %}
+
+    <center class="emphasize">
+        <big>{{ page_user.get_profile.level_name }} ({{ page_user.get_profile.level }})</big><br/>
+        <font style="font-size: 16pt"><strong>{{ page_user.get_profile.points }}</strong> of {{ page_user.get_profile.points_for_current_level }}</font> <a href="/user/{{page_user.get_profile.user.username}}/points/">points</a>
+    </center>
+    
+    {% ifequal user.username page_user.username %}
+    <center class="" style="border:1px solid;border-color:#E3E0D5;border-top:0px;border-bottom:0px">
+            <font style="font-size: 16pt"><strong>{{ page_user.get_profile.credits }}</strong></font> <a href="/redeem/">credits</a>
+    </center>
+    {% endifequal %}
+
+    <center class="activities-box">
+        <table>
+            <tr>
+                <td colspan="5">
+                    <center>
+                    <font style="font-size: 16pt"><strong>{{ page_user.get_profile.activities.count }}</strong></font> <a title="Activities" href="/user/{{page_user.username}}/">Activities</a>
+                    </center>
+                    <div class="hrdiv"><br/></div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <font style="font-size: 16pt"><strong>{{ page_user.get_profile.questions.count }}</strong></font>
+                </td>
+                <td>
+                    <a title="Questions asked" href="/user/{{page_user.username}}/questions/">Questions</a>
+                </td>
+                <td></td>
+                <td align="right">
+                    <font style="font-size: 16pt"><strong>{{ page_user.get_profile.answers.count }}</strong></font>
+                </td>
+                <td>
+                    <a title="Answers given" href="/user/{{page_user.username}}/answers/">Answers</a>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <font style="font-size: 16pt"><strong>{{ page_user.get_profile.notes.count }}</strong></font>
+                </td>
+                <td>
+                    <a title="Notes written" href="/user/{{page_user.username}}/notes/">Notes</a>
+                </td>
+                <td></td>
+                <td align="right">
+                    <font style="font-size: 16pt"><strong>{{ page_user.get_profile.videos.count }}</strong></font>
+                </td>
+                <td>
+                    <a title="Videos added" href="/user/{{page_user.username}}/videos/">Videos</a>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <font style="font-size: 16pt"><strong>{{ page_user.get_profile.books.count }}</strong></font>
+                </td>
+                <td>
+                    <a title="Books maintained" href="/user/{{page_user.username}}/books/">Books</a>
+                </td>
+                <td></td>
+                <td align="right">
+                    <font style="font-size: 16pt"><strong>{{ page_user.get_profile.following_books.count }}</strong></font>
+                </td>
+                <td>
+                    <a title="Following Books" href="/user/{{page_user.username}}/fbooks/">FBooks</a>
+                </td>
+            </tr>
+        </table>
+    </center>
+
+    {% if page_user.get_profile.followers.all %}
+        <div class="grid_5 alpha omega"><br/></div>
+        <div class="grid_5 alpha omega section-header">Followers - {{ page_user.get_profile.followers.all.count }} <small><a href="{{ page_user.get_profile.followers_link }}">see all</a></small></div>
+        <div class="grid_5 alpha omega">
+        {% for f in page_user.get_profile.followers.all|slice:'14' %}
+            {% render f.user.get_profile 'image,-text' %}
+        {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if page_user.get_profile.following %}
+        <div class="grid_5 alpha omega"><br/></div>
+        <div class="grid_5 alpha omega section-header">Following - {{ page_user.get_profile.following.count  }} <small><a href="{{ page_user.get_profile.following_link }}">see all</a></small></div>
+        <div class="grid_5 alpha omega">
+        {% for f in page_user.get_profile.following|slice:'14' %}
+            {% render f.user.get_profile 'image,-text' %}
+        {% endfor %}
+        </div>
+    {% endif %}
+<!--
+    <div class="grid_5 alpha omega">
+     Place this tag where you want the badge to render
+        <g:plus href="https://plus.google.com/103712232789698401189" size="badge"></g:plus>
+    </div>
+-->
+    <div class="grid_5 omega gad">
+        <div class="grid_5 alpha gid"><br/></div>
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-2945383363046281";
+        /* 300 x 250, notemonk box listing page bottom */
+        google_ad_slot = "9649030723";
+        google_ad_width = 300;
+        google_ad_height = 250;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+
+        <!-- medium_rectangle -->
+<!--        <div id='div-gpt-ad-1319891242082-0' style='width:300px; height:250px;'>
+        <script type='text/javascript'>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1319891242082-0'); });
+        </script>
+        </div>
+-->
+    </div>
+{% endblock sidebar %}

@@ -1,0 +1,32 @@
+{% load tags %}
+
+<table width="100%" style="margin-left:-3px">
+    
+
+    <tr class="bookshelf">
+        <td>
+            <span class="bookshelf-title">
+                <a href="{{ more_link }}" class="bookshelf-name-link">
+                    {{ title }}
+                </a>
+                {% if more_link %}
+                    <a href="{{ more_link }}" style="display:table-cell;vertical-align:middle;text-align:right" class="bookshelf-more-link">
+                    <b class="roundedges" style="margin-right:5px;padding:5px;background-color:rgba(255,255,255,0.5);color:#333">see all</b></a>
+                {% endif %}
+            </span>
+   
+            <div class="grid_11 alpha omega bookshelf-body">
+            <div class="grid_10 alpha omega" style="padding-left:40px">
+            {% for book in books %}
+             <span style="float:left;padding:8px 0px 36px 0px;height:150px;display:block">{% render book 'image,-text,more' %}</span>
+            {% endfor %}
+            </div>
+            </div>
+        </td>
+    </tr>
+
+    <tr><td>&nbsp;</td></tr>
+</table>
+
+<div style="float: right">
+</div>

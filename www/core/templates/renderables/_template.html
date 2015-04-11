@@ -1,0 +1,11 @@
+{% load tags %}
+{% load filters %}
+
+{% if flags.is_image %}
+{% endif %}
+
+{% if flags.is_text %}
+    {% if not is_more %}
+    {% else %}
+    {% endif %}
+{% endif %}

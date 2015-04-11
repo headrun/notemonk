@@ -1,0 +1,63 @@
+{% extends "ui/base.html" %}
+
+{% load tags %}
+{% load filters %}
+
+{% block title %}
+<div class="grid_11 alpha">
+    <span class="title">{{ avideo.media.title }}</span>
+    (
+    <span>{% rate avideo %}, </span>
+    <span>{% flag avideo %}</span>)
+    <div>
+        <span>under <a href="{{ avideo.target.link }}">{{ avideo.target.title|truncatewords:5 }}</a></span>
+        <span>by {% render avideo.user.get_profile %}</span>,
+        added <span>{{avideo.date_added|dt}}</span>
+    </div>
+</div>
+{% endblock title %}
+
+{% block content %}
+
+<div class="grid_11 alpha"><br/></div>
+
+<div class="grid_11 alpha">
+    <center>
+        <object width="425" height="344">
+            <param name="movie" value="http://www.youtube.com/v/{{avideo.media.source_id}}&hl=en_US&fs=1&"></param>
+            <param name="allowFullScreen" value="true"></param>
+            <param name="allowscriptaccess" value="always"></param>
+            <embed src="http://www.youtube.com/v/{{avideo.media.source_id}}&hl=en_US&fs=1&"
+                   type="application/x-shockwave-flash"
+                   allowscriptaccess="always" allowfullscreen="true"
+                   width="425" height="344">
+            </embed>
+        </object>
+    </center>
+</div>
+
+{% note avideo %}
+
+<br/><br/>
+{% question avideo avideo.title 5 %}
+
+{% endblock content %}
+
+{% block sidebar %}
+    <div class="grid_5 omega gad">
+
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-2945383363046281";
+        /* 300 x 250, notemonk box listing page bottom */
+        google_ad_slot = "9649030723";
+        google_ad_width = 300;
+        google_ad_height = 250;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+
+    </div>
+
+{% endblock %}

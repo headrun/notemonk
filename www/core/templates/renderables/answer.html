@@ -1,0 +1,64 @@
+{% load tags %}
+{% load filters %}
+
+{% if flags.is_instream %}
+    <div style="display:table">
+        <div style="display:table-row">
+            <strong>A.</strong>
+            <a href="{{ obj.link }}">{{ obj.text|striptags|truncatesmart:'200' }}</a>
+        </div>
+        <div style="margin-left:1px">
+   {% if flags.is_context %}
+         <div style="" class="streamexinfo"><span>for {% render obj.question '-dateadded,-context' %}</span></div>
+    {% endif %}
+
+    {% if flags.is_dateadded %}
+        <div style=""><span>{% if flags.is_rate %}{% rate obj %}{% endif %} . </span><a href="{{ obj.target.link }}">answer</a></div>
+    {% endif %}
+        <div style=""></div>
+        </div>
+    </div>
+{% else %}
+{% if not flags.is_more %}
+    
+    <strong>A.</strong>
+    {{ obj.text|striptags|truncatesmart:'200' }} <a href="{{ obj.link }}">link</a>
+
+    {% if flags.is_context %}
+        for {% render obj.question '-dateadded,-context' %}
+    {% endif %}
+
+    {% if flags.is_dateadded %}
+        <br>
+        {{ obj.date_added|dt }}
+    {% endif %}
+
+{% else %}
+
+    {{ obj.text|strip_p }}
+
+    <span class="light">
+    {% if flags.is_rate %}
+        {% rate obj %}
+    {% endif %}
+   
+    {% if flags.is_flag %}
+        {% flag obj %}
+    {% endif %}
+
+    {% if flags.is_context %}
+        for {% render obj.question '-dateadded,-context' %}
+    {% endif %}
+
+    {% if flags.is_addedby %}
+        added by {% render obj.user.get_profile %}
+    {% endif %}
+    
+    {% if flags.is_dateadded %}
+        {{ obj.date_added|dt }}
+    {% endif %}
+
+    </span>
+
+{% endif %}
+{% endif %}

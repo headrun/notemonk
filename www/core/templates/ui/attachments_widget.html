@@ -1,0 +1,22 @@
+{% load tags %}
+{% load filters %}
+
+{% if target.attachments.all %}
+    
+    <strong>Attachments</strong>&nbsp;&nbsp;
+    {% if target.attachments.all.count|gt:num %}
+    <a href="/attachments/{{ target.ctype.id }}/{{ target.id }}/">see all</a>&nbsp;
+    {% endif %}
+    {% if can_add %}
+    <a href="/attachment/add/{{ target.ctype.id }}/{{ target.id }}/">add</a>
+    {% endif %}
+    <br/>
+
+    {% for a in target.attachments.all|slice:'5' %}
+        {% render a %}
+        <div class="hrdiv"/>
+    {% endfor %}
+
+{% else %}
+<a href="/attachment/add/{{ target.ctype.id }}/{{ target.id }}/">add attachment</a>
+{% endif %}

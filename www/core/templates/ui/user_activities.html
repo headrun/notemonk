@@ -1,0 +1,26 @@
+{% extends "ui/user_base.html" %}
+
+{% load filters %}
+{% load tags %}
+
+{% block listing %}
+    {% for item in stream %}
+    <div class="grid_11 alpha stream">
+        {% render item 'more,-flag,-addedby,context' %}
+    </div>
+    {% endfor %}
+{% endblock listing %}
+
+{% block pagination %}
+    {% if next_id != None %}
+    <div class="grid_11 alpha slight-emphasize">
+        <center>
+            <big>
+                <strong>
+                    <a href="/user/{{ page_user.username }}/{{ next_id }}/">More ...</a>
+                </strong>
+            </big>
+        <center>
+    </div>
+    {% endif %}
+{% endblock pagination %}

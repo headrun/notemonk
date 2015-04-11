@@ -1,0 +1,86 @@
+{% load filters %}
+{% load tags %}
+
+{% block bad %}
+
+    {% if show_ad %}
+   	<a id="badlb_container" href="http://bit.ly/KlFIt1" target="_blank">
+		<img src="/static/images/bad/badlb.png" id="badlb" style="position:fixed;bottom:0px;right:0px;z-index:-1"/>
+	</a>
+     	<a id="badrb_container" href="http://bit.ly/KlFIt1" target="_blank"><img src="/static/images/bad/badrb.png" id="badrb" style="position:fixed;bottom:0px;left:0px;z-index:-1"/></a>
+	<script>
+	$(document).ready(function(){
+		//constants
+		var BEST_SCREEN_RES = 1650, MIN_SCREEN_RES = 1360;
+
+
+		var left_ad = $("#badlb");
+		var right_ad = $("#badrb");
+		var left_ad_wrapper = left_ad.parent();
+		var right_ad_wrapper = right_ad.parent();
+		var old_html = left_ad_wrapper.html();
+		var screen_width = $(this).width();
+		var render_background_ad = function(){
+            var olw = left_ad.width();
+            var orw = right_ad.width();
+
+            var popup = false;
+            var hide_popup = function(){
+                if(popup)
+                {
+                    popup = false;
+                    $("#small_ad").remove();
+                left_ad.show();
+                right_ad_wrapper.show();
+                }
+            }
+
+            var show_popup = function(){
+                popup = true;
+                if($("#small_ad").length > 0)
+                     $("#small_ad").remove();
+                left_ad_wrapper.append('<iframe id="small_ad" scrolling="no" frameborder="0" style="display:block;width:270px;position:fixed;bottom:5px;float:left;height:190px;right:0px;z-index:100" src="/bad/"></iframe>');
+                left_ad.hide();
+                right_ad_wrapper.hide();
+            }
+
+            var resize_handler = function(){
+                var width = $(this).width();
+                    var percent = ((BEST_SCREEN_RES - width)/BEST_SCREEN_RES).toFixed(2);
+                var lw = left_ad.width();
+                var rw = right_ad.width();
+                if( width > BEST_SCREEN_RES)
+                {
+                    hide_popup();	
+                    left_ad.width(olw);
+                    right_ad.width(orw);
+                }
+                else if(width < BEST_SCREEN_RES && width > MIN_SCREEN_RES)
+                {
+                    hide_popup();
+                    left_ad.width(olw - (Math.ceil(olw * percent) * 2) );
+                    right_ad.width(orw - (Math.ceil(orw * percent) * 2) );
+                }
+                else
+                {
+                    show_popup();		
+                }
+            };
+
+            $(window).resize(function(){
+                resize_handler.apply(this);
+            });
+            resize_handler.apply(window);   
+        }
+
+        $("#badlb").load(function(){
+            $("#badrb").load(function(){
+                render_background_ad();
+            });
+        });
+    });
+
+	</script>
+    {% endif %}
+
+{% endblock %}

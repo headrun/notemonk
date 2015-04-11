@@ -1,0 +1,90 @@
+{% extends "ui/base.html" %}
+
+{% load tags %}
+{% load filters %}
+
+{% block title %}
+<div class="grid_11 alpha">
+    <span class="title">{{ page_user.get_full_name }} ({{page_user.username}})</span><br/>
+    {% if page_user.get_profile.location %}
+    from <i>{{ page_user.get_profile.location }}</i>,
+    {% endif %}
+    {% if page_user.get_profile.institution %}
+    affiliated to <i>{{ page_user.get_profile.institution }}</i>,
+    {% endif %}
+    joined {{ page_user.date_joined|dt }}
+</div>
+
+<div class="grid_5 alpha omega">
+    <span class="subtitle">
+        <a href="{{ user.get_profile.link  }}">
+            <img src="/static/images/view.png" alt="view"/>
+        </a>
+    </span>
+</div>
+
+{% endblock title %}
+
+
+{% block content %}
+<br/>
+
+{% if page_user.get_profile.note.text.raw %}
+<div class="grid_11 alpha note">
+    {{ page_user.get_profile.note.text }}
+</div>
+<div align="grid_11 alpha right">
+    <a href="/note/{{ page_user.get_profile.note.id }}/edit/?ref_path={{ ref_path }}">edit</a>
+</div>
+{% else %}
+<div class="grid_11 alpha omega note" style="padding-left:0px;border:1px dotted #0093CC">
+    <a style="padding:5px" href="/note/{{ page_user.get_profile.note.id }}/edit/?ref_path={{ ref_path }}">Write about yourself</a>
+</div>
+{% endif %}
+
+<!-- spacing -->
+<div class="grid_11 alpha">
+    <br/>
+</div>
+
+<div class="grid_11 alpha">
+    <form enctype="multipart/form-data" action="/user/edit/" method="POST" autocomplete="off">
+
+        <div class="grid_11 alpha omega form roundedges">
+            <table width="100%">
+                {{ form.as_table }}
+            </table>
+        </div>
+
+        <!-- spacing -->
+        <div class="grid_11 alpha">
+            <br/>
+        </div>
+
+        <strong>Notification settings</strong>
+        <div class="grid_11 alpha form roundedges">
+            <table width="100%">
+                <tr></td>
+                {{ nform.as_ul }}
+                </td></tr>
+            </table>
+        </div>
+
+        <div align="right" class="form">
+            <input style="width:85px;height:30px" type="submit" value="Update"/>
+        </div>
+
+    </form>
+</div>
+
+{% endblock content %}
+
+{% block sidebar %}
+<center>
+    {% if page_user.get_profile.image %}
+    <img src="{{ page_user.get_profile.image|thumbnail:'200x200' }}"/>
+    {% else %}
+    <img src="/static/images/user.png"/>
+    {% endif %}
+</center>
+{% endblock sidebar %}

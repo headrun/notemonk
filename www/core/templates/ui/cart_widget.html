@@ -1,0 +1,47 @@
+{% load tags %}
+
+<div>
+<strong>Your cart</strong><br/>
+
+{% for item, num in cart %}
+<div>
+    <a href="{{ item.link }}">
+        <img src="{{ item.image|thumbnail:'32x32' }}"/>
+    </a>
+    <a href="{{ item.link }}">
+        {{ item.title }}
+    </a>
+    (<a href="/cart/remove/{{ item.id }}/?next={{ ref_path }}">remove</a>)
+    <select name="item_{{ item.id }}" onchange="window.location.href= '/cart/add/{{ item.id }}/' + this.value + '/?next={{ ref_path}}';">
+        {% for opt in item.opts %}
+        <option {% ifequal opt num %}selected{% endifequal %} value="{{ opt }}">
+            {{ opt }}
+        </option>
+        {% endfor %}
+    </select>
+    <strong>{{ item.item_credits }}</strong> credits.
+    <div class="hrdiv"/>
+</div>
+{% endfor %}
+
+{% if cart %}
+
+    Shipping credits: <strong>{{ handling_credits }}</strong> credits
+    <br/>
+    <br/>
+
+    Total <strong>{{ total_credits }}</strong> credits
+
+    {% if sufficient_credits %}
+    , <strong>{{ available_credits }}</strong> left
+        {% if checkout_link %}
+        <br/><a href="/cart/checkout/">checkout</a>
+        {% endif %}
+    {% else %}
+    <br/>
+    Insufficient credits :( You need <strong>{{ available_credits }}</strong> more credits to get these.
+    {% endif %}
+
+{% endif %}
+
+</div>

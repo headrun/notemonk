@@ -1,0 +1,45 @@
+{% extends "ui/base.html" %}
+
+{% load tags %}
+{% load filters %}
+
+{% block title %}
+<div class="grid_11 alpha">
+    <span class="title">Note:</span> <span class="title"><a href="{{ note.target.link }}">{{ note.target.title }}</a></span>
+</div>
+{% endblock title %}
+
+{% block content %}
+
+<form action="/note/{{ note.id }}/edit/" method="POST">
+    <input type="hidden" name="ref_path" value="{{ ref_path }}"/>
+    <input type="hidden" name="content_path" value="{{ note.target.link }}"/>
+    <textarea id="notetext" name="note">{{ note.text.raw }}</textarea>
+    <div align="right">
+        <label for="comment">Comment</label>
+        <input type="text" size="60" name="comment" value="" align="right" id="comment"/>
+        <input type="submit" value="Update"/>
+    </div>
+</form>
+
+{% markup "notetext" note %}
+
+{% endblock content %}
+
+{% block sidebar %}
+
+<div class="revisions_block">
+    {% for version in versions.object_list %}
+    <div class="revision_block">
+        <a href="/note/{{ note.id }}/revision/{{ version.id }}/">{{ version.revision.comment }}</a>
+        created {{ version.revision.date_created|dt  }} by
+        {% render version.revision.user.get_profile %}
+    </div>
+    <br/>
+    {% endfor %}
+</div>
+<div class="grid_11 alpha">
+    {% paginator versions paging_url %}
+</div>
+
+{% endblock %}

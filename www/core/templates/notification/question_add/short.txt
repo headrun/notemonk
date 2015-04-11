@@ -1,0 +1,1 @@
+{{user.get_profile.title}} asked question "{{ question.text|striptags }}"

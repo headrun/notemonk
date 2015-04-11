@@ -1,0 +1,73 @@
+{% extends "ui/base.html" %}
+
+{% load tags %}
+{% load filters %}
+
+{% block title %}
+<div class="grid_11 alpha">
+    <span class="title">{{ redemption.title }}</span><br/>
+    redeemed {{ redemption.date_added|dt }} by {% render redemption.user.get_profile %}
+</div>
+{% endblock title %}
+
+{% block content %}
+
+<div class="grid_11 alpha"><br/></div>
+
+<div class="grid_11 alpha">
+
+{% for ritem in redemption_items %}
+<div>
+    {{ forloop.counter }}. 
+    {% render ritem 'image' %}
+    (<strong>{{ ritem.num }}</strong> nos)
+</div>
+{% endfor %}
+
+<div class="grid_11 alpha"><br/></div>
+
+<div class="grid_11 alpha">
+{% if more_info %}
+Total <strong>{{ redemption.credits }}</strong> credits
+
+<br/>
+<br/>
+<strong>Mailing address</strong><br/>
+{{ redemption.user.get_profile.mailing_address }}
+{% endif %}
+</div>
+
+</div>
+
+{% endblock content %}
+
+{% block sidebar %}
+
+    <div class="grid_5 omega">
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-2945383363046281";
+        /* redeemables right first */
+        google_ad_slot = "6982616791";
+        google_ad_width = 250;
+        google_ad_height = 250;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-2945383363046281";
+        /* redeemables right second */
+        google_ad_slot = "2727111707";
+        google_ad_width = 250;
+        google_ad_height = 250;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+
+    </div>
+
+{% endblock %}

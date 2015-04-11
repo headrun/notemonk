@@ -1,0 +1,22 @@
+{% extends "ui/base.html" %}
+
+{% block title %}
+
+<div class="grid_11 alpha">
+    <span class="title">Moderation request accepted</span>&nbsp;
+</div>
+
+{% endblock title %}
+
+{% block content %}
+
+<div class="grid_11 alpha"><br/></div>
+
+<p>
+    Made <a href="{{ moderator.get_profile.link }}">{{ moderator.get_profile.title  }}</a> a moderator for your book <a href="{{ book.link }}">{{ book.title }}</a>. You can edit the list of moderators for your book <a href="{{ book.edit_link }}">here</a>.
+<p>
+
+{% endblock content %}
+
+{% block sidebar %}
+{% endblock sidebar %}

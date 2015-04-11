@@ -1,0 +1,10 @@
+{% load i18n %}
+
+{% blocktrans %}
+{{ message }}
+
+
+-----------------------------
+You received this notification because you are a member of www.notemonk.com. Choose which notifications to receive using this link -> http://{{ current_site }}/user/edit/
+
+{% endblocktrans %}

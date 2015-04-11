@@ -1,0 +1,4 @@
+{{ user.get_profile.title }} rated book {{rate_obj.title}}
+
+To rate this click here:
+http://{{ current_site }}{{rate_obj.link}}

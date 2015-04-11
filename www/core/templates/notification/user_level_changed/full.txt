@@ -1,0 +1,8 @@
+{{user.get_profile.title}} reached
+
+{{user.get_profile.level_name}}({{ user.get_profile.level }}) status
+
+with a total of {{ user.get_profile.points }} points!
+
+See user profile at:
+http://{{ current_site }}{{ user.get_profile.link }}

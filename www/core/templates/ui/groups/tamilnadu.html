@@ -1,0 +1,49 @@
+{% extends "ui/base.html" %}
+{% load tags %}
+
+{% block title %}
+    <h1 class="group-title">Tamil Nadu Books</h1>
+{% endblock title %}
+
+{% block content %}
+
+  <span style="color:#333" class="group-caption"> All <strong>Tamilnadu Text books</strong> listed below are available for <strong>download</strong>.</span>
+
+    {% bookshelf 'Class 12' 'all' 'Tamil Nadu, 12th' 8 %}
+    {% bookshelf 'Class 11' 'all' 'Tamil Nadu, 11th' 8 %}
+    {% bookshelf 'Class 10' 'all' 'Tamil Nadu, 10th' 8 %}
+    {% bookshelf 'Class 9' 'all' 'Tamil Nadu, 9th' 8 %}
+    
+    {% bookshelf 'Class 8' 'all' 'Tamil Nadu, 8th' 8 %}
+    {% bookshelf 'Class 7' 'all' 'Tamil Nadu, 7th' 8 %}
+    {% bookshelf 'Class 6' 'all' 'Tamil Nadu, 6th' 8 %}
+
+    {% bookshelf 'Class 5' 'all' 'Tamil Nadu, 5th' 8 %}
+    {% bookshelf 'Class 4' 'all' 'Tamil Nadu, 4th' 8 %}
+    {% bookshelf 'Class 3' 'all' 'Tamil Nadu, 3rd' 8 %}
+    {% bookshelf 'Class 2' 'all' 'Tamil Nadu, 2nd' 8 %}
+    {% bookshelf 'Class 1' 'all' 'Tamil Nadu, 1st' 8 %}
+
+{% endblock content %}
+
+{% block sidebar %}
+
+    Notemonk is an exciting new way to learn your textbooks.
+    <ul>
+        <li><strong>Download books</strong> to your computer
+        <li><strong>Ask questions</strong> on any topic in the text book
+        <li><strong>Watch videos</strong> related to difficult topics
+        <li><strong>Prepare notes</strong> for quick reference before exams
+    </ul>
+    <div align="center">
+        <img alt="Notemonk" src="/static/images/notemonk_mascot_medium.png"/>
+    </div>
+    <div class="grid_5 alpha" style="margin-left:-10px">
+       <!-- End: adBrite -->
+        <div id='div-gpt-ad-1319891242082-0' style='width:300px; height:250px;'>
+            <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1319891242082-0'); });
+            </script>
+        </div>
+    </div>
+ {% endblock sidebar %}

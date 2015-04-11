@@ -1,0 +1,46 @@
+{% load tags %}
+
+<div class="grid_11 alpha">
+
+    {% if target.note %}
+    {% ifnotequal target.note user_note %}
+    <div class="note">
+        {{ target.note.text }}
+        <div align="right">
+            {% rate target.note %} {% flag target.note %}
+            by {% render target.note.user.get_profile %}
+            | <a href="{{ target.note.link }}">link</a>
+        </div>
+    </div>
+    {% endifnotequal %}
+    {% endif %}
+
+    {% if user_note %}
+    <div class="note">
+        {{ user_note.text }}
+        <div align="right">
+            {% rate target.note %} {% flag target.note %}
+            by {% render user_note.user.get_profile %}
+            | <a href="{{ user_note.link }}">link</a>
+            | <a href="/note/{{ user_note.id }}/edit/?ref_path={{ target.link }}">edit</a>
+        </div>
+    </div>
+    <div align="right">
+    {% else %}
+
+    <form style="display:none" name="note_{{ target.ctype.id }}_{{ target.id }}" action="/add/note/" method="POST">
+        <input type="hidden" name="target_type" value="{{ target.ctype.id }}">
+        <input type="hidden" value="{{ target.id }}" name="target">
+        <input type="hidden" value="{{ target.link }}" name="ref_path">
+    </form>
+
+    <div class="note">
+        <a href="#" onclick="javascript:document.forms['note_{{ target.ctype.id }}_{{ target.id }}'].submit();return false;">add note</a>
+        {% endif %}
+
+        {% if target.note %}
+        <a style="float:right" href="/notes/{{ target.ctype.id }}/{{ target.id }}/{{ target.title }}/">see all notes</a>
+        {% endif %}
+    </div>
+    <br/>
+</div>

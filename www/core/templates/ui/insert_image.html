@@ -1,0 +1,58 @@
+{% load tags %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/css/main.css"></link>
+        <link rel="stylesheet" href="http://static.ak.connect.facebook.com/connect.php/en_US/css/connect-button-css/bookmark-button-css/share-button-css/FB.Connect-css/connect-css"></link>
+    </head>
+
+    <body style="background-color: #EEEEEE;">
+        <script src="http://static.ak.connect.facebook.com/connect.php/en_US" type="text/javascript"></script><script type="text/javascript">FB.init("7703fdc51bb3335309922341cdb1ec0f");</script>
+
+        {% if error %}
+        <div class="emphasize">{{ error }}</div><br/>
+        {% endif %}
+
+        <form action="" method="POST" enctype="multipart/form-data">
+            <table width="100%">
+                <tr>
+                    <td>Title</td>
+                    <td>
+                        <input type="text" name="title" value="{{ title }}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Alt</td>
+                    <td>
+                        <input type="text" name="alt" value="{{ alt }}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <br/>
+                        <div class="hrdiv"/>
+                        <br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Url</td>
+                    <td>
+                        <input type="text" name="url" value="{{ url }}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <strong>(or)</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Upload</td>
+                    <td>
+                        <input type="file" name="image" onchange="this.form.submit();"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+    </body>
+</html>

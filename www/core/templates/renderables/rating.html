@@ -1,0 +1,7 @@
+{% load tags %}
+{% load filters %}
+
+{% render obj.user.get_profile %} rated {% render obj.target '-dateadded'%}<br/>
+{% if flags.is_dateadded %}
+{{ obj.date_added|dt }}
+{% endif %}

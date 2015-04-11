@@ -1,0 +1,18 @@
+{% extends "ui/base.html" %}
+
+{% block title %}
+<div class="grid_11 alpha">
+    <span class="title">Activation did not happen</span>&nbsp;
+</div>
+{% endblock title %}
+
+{% block content %}
+
+<!-- spacing -->
+<div class="grid_11 alpha">
+    <br/>
+</div>
+
+<p>The activation key (<strong>{{ activation_key  }}</strong>) did not match our records. Sorry for the inconvenience. Please re-attempt registration. If problem continues, please do not hesitate to drop us a mail at support@notemonk.com.</p>
+
+{% endblock content %}

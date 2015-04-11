@@ -1,0 +1,22 @@
+{% load filters %}
+{% load tags %}
+
+{% ifnotequal target user.get_profile %}
+<div id="add_post_{{ target.id }}">
+    <textarea class="default_text" rows="1" style="width: 100%" onfocus="expandtextarea('#add_post_{{ target.id }}', '#post_add_form_{{ target.id }}', '#post_{{ target.id }}', '{{ user.is_anonymous }}', '{{ ref_path }}');" title="Say something to {{ topic }}..."></textarea>
+</div> 
+{% else %}
+
+<div id="add_post_{{ target.id }}">
+    <textarea class="default_text" rows="1" style="width: 100%" onfocus="expandtextarea('#add_post_{{ target.id }}', '#post_add_form_{{ target.id }}', '#post_{{ target.id }}', '{{ user.is_anonymous }}', '{{ ref_path }}');" title="What's on your Mind..."></textarea>
+</div> 
+
+{% endifnotequal %}
+<div id="post_add_form_{{ target.id }}" style='display: none'>
+<form action="/profilepost/add/{{ target.id }}/?next={{ ref_path }}" method="POST">
+    <textarea name='text' class="elastic" id="post_{{ target.id }}" rows="3" style="width: 100%"></textarea>
+    <br/>
+    <div align="right"><input type="submit" value="Post"></div>
+</form>
+</div>
+

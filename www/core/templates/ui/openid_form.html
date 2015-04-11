@@ -1,0 +1,37 @@
+<script>
+
+open_id_provider = '';
+
+function on_provider_click(provider)
+{
+    var prefix = ''
+    if (provider == "google")
+        prefix = 'http://www.google.com/profiles/';
+    else if (provider == "yahoo")
+        prefix = 'http://me.yahoo.com/';
+
+    $("#openid_add_form").show();
+    open_id_provider = prefix;
+    $("#openid_provider").focus();
+    $("#provider_label").text(provider + " id: ");
+}
+
+function on_submit()
+{
+    var final_text = '';
+    var user_name = $('#openid_provider').val();
+    final_text = open_id_provider + user_name;
+    $('#openid_provider').val(final_text);
+}
+</script>
+
+<img src="/static/images/google.jpg" onclick="javascript: on_provider_click('google');"/>
+<img src="/static/images/yahoo.jpg" onclick="javascript: on_provider_click('yahoo');"/>
+
+<form action="{% url openid_redirect %}" method="GET">
+    <div id="openid_add_form" style="display: none;">
+        <label id="provider_label" for="openid_provider">Id</label>
+        <input type="text" name="openid_provider" id="openid_provider"/>
+        <input type="submit" value="Submit" onclick="on_submit();">
+    </div>
+</form>

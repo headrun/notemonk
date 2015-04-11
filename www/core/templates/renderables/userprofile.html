@@ -1,0 +1,111 @@
+{% load tags %}
+{% load filters %}
+
+{% if flags.is_bcard %}
+    <div style="float: left; padding: 12px;height:64px;width:252px">
+        <a href="{{ obj.link }}" title="{{ obj.title }} - {{ obj.level_name }} ({{ obj.level }}) with {{ obj.points }} points" style="float:left;line-height:0">
+            {% if obj.image %}
+            <img src="{{ obj.image|thumbnail:'S64x64' }}"/>
+            {% else %}
+            <img src="{{ '/static/images/user.png'|thumbnail:'S64x64' }}"/>
+            {% endif %}
+        </a>
+        </span>
+    <span style="margin-left:5px;float: left">
+           <a href="{{ obj.link }}" 
+            class="username" 
+            style="display:block;overflow:hidden;white-space:nowrap;width:145px;text-overflow:ellipsis"
+            title="{{ obj.title }}">
+            {% ifequal user obj.user %}You{% else %}{{ obj.title }}{% endifequal %}</a>
+        <a style="margin-bottom:5px;display:block;color:#999;font-size:0.8em" href="{{ obj.link }}">{{ obj.level_name }} ({{ obj.level }})</a>
+
+        {% if flags.is_rate %}
+            {% rate obj %}
+        {% endif %}
+
+        {% if flags.is_flag %}
+            {% flag obj %}
+        {% endif %}
+
+        {% if flags.is_follow %}
+            {% follow obj %}
+        {% endif %}
+        </div>
+
+{% else %}
+{% if flags.is_newlook %}
+{% if flags.is_image %}
+    {% if flags.is_text %}<span style="float: left; padding: 5px;">{% endif %}
+    {% if flags.is_more %}
+        <a href="{{ obj.link }}" title="{{ obj.title }} - {{ obj.level_name }} ({{ obj.level }}) with {{ obj.points }} points" style="float:left;line-height:0">
+            {% if obj.image %}
+            <img style="padding:2px 2px" src="{{ obj.image|thumbnail:'S32x32' }}"/>
+            {% else %}
+            <img style="padding:2px 2px" src="{{ '/static/images/user.png'|thumbnail:'S32x32' }}"/>
+            {% endif %}
+        </a>
+    {% else %}
+        <a href="{{ obj.link }}" title="{{ obj.title }} - {{ obj.level_name }} ({{ obj.level }}) with {{ obj.points }} points" style="float:left;line-height:0">
+            {% if obj.image %}
+            <img style="padding:2px 2px" src="{{ obj.image|thumbnail:'S32x32' }}"/>
+            {% else %}
+            <img style="padding:2px 2px"src="{{ '/static/images/user.png'|thumbnail:'S32x32' }}"/>
+            {% endif %}
+        </a>
+    {% endif %}
+    {% if flags.is_text %}</span>{% endif %}
+{% endif %}
+
+{% else %}
+{% if flags.is_image %}
+    {% if flags.is_text %}<span style="float: left; padding: 5px;">{% endif %}
+    {% if flags.is_more %}
+        <a href="{{ obj.link }}" title="{{ obj.title }} - {{ obj.level_name }} ({{ obj.level }}) with {{ obj.points }} points" style="float:left;line-height:0">
+            {% if obj.image %}
+            <img style="padding:2px 2px" src="{{ obj.image|thumbnail:'S64x64' }}"/>
+            {% else %}
+            <img style="padding:2px 2px" src="{{ '/static/images/user.png'|thumbnail:'S64x64' }}"/>
+            {% endif %}
+        </a>
+    {% else %}
+        <a href="{{ obj.link }}" title="{{ obj.title }} - {{ obj.level_name }} ({{ obj.level }}) with {{ obj.points }} points" style="float:left;line-height:0">
+            {% if obj.image %}
+            <img style="padding:2px 2px" src="{{ obj.image|thumbnail:'S32x32' }}"/>
+            {% else %}
+            <img style="padding:2px 2px" src="{{ '/static/images/user.png'|thumbnail:'S32x32' }}"/>
+            {% endif %}
+        </a>
+    {% endif %}
+    {% if flags.is_text %}</span>{% endif %}
+{% endif %}
+{% endif %}
+{% if flags.is_text %}
+    {% if flags.is_image %}<span style="float: left">{% endif %}
+    {% if not flags.is_more %}
+        <a class="username"
+           title="{{ obj.level_name }} ({{ obj.level }}) with {{ obj.points }} points"
+           href="{{ obj.link }}">{% ifequal user obj.user %}You{% else %}{{ obj.title }}{% endifequal %}</a>
+    {% else %}
+
+        <a href="{{ obj.link }}" class="username">{% ifequal user obj.user %}You{% else %}{{ obj.title }}{% endifequal %}</a>&nbsp;-&nbsp;
+        <a href="{{ obj.link }}">{{ obj.level_name }} ({{ obj.level }})</a>
+        <br/>
+
+        {% if flags.is_rate %}
+            {% rate obj %}
+        {% endif %}
+       
+        {% if flags.is_flag %}
+            {% flag obj %}
+        {% endif %}
+        
+        {% if flags.is_follow %}
+            {% follow obj %}
+        {% endif %}
+       
+        {{ obj.user.date_joined|dt }}
+        
+    {% endif %}
+    {% if flags.is_image %}</span>{% endif %}
+{% endif %}
+{% endif %}

@@ -1,0 +1,223 @@
+{% extends "ui/base.html" %}
+{% load tags %}
+{% load filters %}
+
+{% block title %}
+    <meta property="fb:app_id"      content="356589223428" /> 
+    <meta property="og:type"        content="website" /> 
+    <meta property="og:url"         content="http://www.notemonk.com/ncert/" /> 
+    <meta property="og:title"       content="{{ page_title }}" /> 
+    <meta property="og:description" content="Notemonk is an exciting new way to experience books." /> 
+    <meta property="og:image"       content="http://www.notemonk.com/static/images/notemonk_mascot_medium.png" /> 
+
+
+{% endblock title %}
+
+{% block content %}
+
+    <!--
+<div class="grid_11 alpha emphasize">
+    <div style="float: left; padding: 10px;">
+        <img alt="Notemonk" src="/static/images/notemonk_mascot_medium.png" height="120px"/>
+    </div>
+    
+
+    <font style="font-size: 22px;">Notemonk is an exciting new way to experience books</font><br/><br/>
+
+    <font style="font-size: 16px">
+        <strong>Download books</strong> to your computer<br/>
+        <strong>Ask questions</strong> on any topic in the text book<br/>
+        <strong>Watch videos</strong> related to difficult topics<br/>
+        <strong>Prepare notes</strong> for quick reference before exams<br/>
+    </font>
+
+    {% button 'http://ncert.notemonk.com/' 'color=BFBFBF' 'title=All NCERT Books' %}<strong>NCERT Books</strong>{% endbutton %}&nbsp;&nbsp;&nbsp;
+    {% button 'http://www.notemonk.com/tamilnadu/' 'color=BFBFBF' 'title=Tamilnadu Books' %}<strong>Tamilnadu Books</strong>{% endbutton %}&nbsp;&nbsp;&nbsp;
+    {% button 'http://www.notemonk.com/bits_msss/' 'color=BFBFBF' 'title=BITS PILANI MSSS Books' %}<strong>BITS MSSS Books</strong>{% endbutton %}&nbsp;&nbsp;&nbsp;
+    {% button 'http://www.notemonk.com/anu_books/' 'color=BFBFBF' 'title=Acharya Nagarjuna University Books' %}<strong>ANU Books</strong>{% endbutton %}&nbsp;&nbsp;&nbsp;
+    {% button 'http://www.notemonk.com/ipe_books/' 'color=BFBFBF' 'title=Andhra Pradesh Intermediate Books' %}<strong>IPE Books</strong>{% endbutton %}&nbsp;&nbsp;&nbsp;
+</div>
+
+    -->
+
+<div class="grid_11 alpha">
+    <div class="section-header">Popular Books <small><a style="float:right" href="/books/popular/">more</a></small></div>
+    <div class="hrdiv"></div>
+    {% for book in popular_books|slice:"4" %}
+        {% render book 'image,more,-text' %}
+    {% endfor %}
+    <br/>
+</div>
+
+<div class="grid_11 alpha"><br/></div>
+
+<div class="grid_11 alpha">
+    <!--
+    <div class="section-header">Recently added Questions <small><a href="/questions/all/recent/">more</a></small></div>
+    <div class="hrdiv"></div>
+    {% for question in new_questions|slice:"10" %}
+        {% render question 'more,-topanswer' %}
+        <div class="hrdiv"></div>
+    {% endfor %}
+    <br/>
+    -->
+    
+    <div class="section-header">What's going on<small><a style="float:right" href="/questions/all/recent/">more</a></small></div>
+    <div class="hrdiv"></div>
+    {% for item in stream|slice:":10" %}
+    <div class="grid_11 alpha stream">
+        {% render item 'more,-flag,-addedby,context' %}
+        <br/>
+    </div>
+   <!--  <div class="grid_11 alpha hrdiv"></div> -->
+    {% endfor %}
+
+    <div class="grid_11 alpha omega">
+     <div class="ghad">
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-2945383363046281";
+        /* 468x60, notemonk horizontal download page */
+        google_ad_slot = "5208398735";
+        google_ad_width = 468;
+        google_ad_height = 60;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+      </div>
+    </div>
+
+    {% for item in stream|slice:"10:" %}
+    <div class="grid_11 alpha stream">
+        {% render item 'more,-flag,-addedby,context' %}
+        <br/>
+    </div>
+   <!--  <div class="grid_11 alpha hrdiv"></div> -->
+    {% endfor %}
+
+     <div class="grid_11 alpha omega">
+     <div class="ghad">
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-2945383363046281";
+        /* 468x60, notemonk horizontal download page */
+        google_ad_slot = "5208398735";
+        google_ad_width = 468;
+        google_ad_height = 60;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+     </div>
+    </div>
+
+    {% if next_id != None %}                                                                                    
+    <div class="grid_11 alpha">                                                                
+        <center>                                                                                                
+            <big>                                                                                               
+                <strong>                                                                                        
+                    <a href="/activities/all/{{ next_id }}/">More ...</a>                                       
+                </strong>                                                                                       
+            </big>                                                                                              
+        <center>                                                                                                
+    </div>                                                                                                      
+    {% endif %}                                       
+</div>
+
+{% endblock content %}
+
+{% block sidebar %}
+
+    Notemonk is an exciting new way to learn your textbooks.
+    <ul>
+        <li><strong>Download books</strong> to your computer
+        <li><strong>Ask questions</strong> on any topic in the text book
+        <li><strong>Watch videos</strong> related to difficult topics
+        <li><strong>Prepare notes</strong> for quick reference before exams
+    </ul>
+
+    <p align="center">
+        <a href="/book/72/Help.on.Notemonk/"><big><strong>Learn more</strong></big></a>
+    </p>
+
+    {% if top_users %}
+    <div class="grid_5 alpha omega">
+    <div class="section-header">Toppers</div>
+    <div class="hrdiv"></div>
+    {% for user in top_users|slice:"14" %}
+    {% render user 'image,-text,sidebar' %}
+    {% endfor %}
+    </div>
+    <div class="grid_5 alpha omega"><br/></div>
+    {% endif %}
+    
+    <div class="grid_5 alpha" style="">
+    <iframe src="//www.facebook.com/plugins/likebox.php?href=http://www.facebook.com/notemonk&amp;width=280&amp;height=258&amp;colorscheme=dark&amp;show_faces=true&amp;border_color=%23ddd&amp;stream=false&amp;header=false&amp;appId=356589223428" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:258px;" allowTransparency="true"></iframe>
+    </div>
+    
+<!--    <div class="grid_5 alpha omega">
+        <g:plus href="https://plus.google.com/103712232789698401189" size="badge"></g:plus>
+    </div>
+-->
+
+    {% if new_videos %}
+    <div class="grid_5 alpha omega">
+    <div class="section-header">Recently added Videos <small><a href="/videos/all/recent/">more</a></small></div>
+    <div class="hrdiv"></div>
+    {% for video in new_videos|slice:"6" %}
+    {% render video 'image,more,-text' %}
+    {% endfor %}
+    </div>
+    <div class="grid_5 alpha omega"><br/></div>
+    {% endif %}
+
+    {% if active_topics %}
+    <div class="grid_5 alpha omega">
+    <div class="section-header">Active Topics</div>
+    <div class="hrdiv"></div>
+    {% for topic in active_topics|slice:"5" %}
+    <a style="text-decoration: none;" href="{{ topic.link }}">{{ topic.title }}</a>
+    <div class="hrdiv"></div>
+    {% endfor %}
+    </div>
+    <div class="grid_5 alpha omega"><br/></div>
+    {% endif %}
+
+    {% if new_notes %}
+    <div class="grid_5 alpha omega">
+    <div class="section-header">Recently added Notes <small><a href="/notes/all/recent/">more</a></small></div>
+    <div class="hrdiv"></div>
+    {% for note in new_notes|slice:"5" %}
+        {% render note %}
+    <div class="hrdiv"></div>
+    {% endfor %}
+    </div>
+    <div class="grid_5 alpha omega"><br/></div>
+    {% endif %}
+
+    {% if online_users %}
+    <div class="grid_5 alpha omega">
+    <div class="section-header">Recent online Members</div>
+    <div class="hrdiv"></div>
+    {% for user in online_users|slice:"7" %}
+    {% render user.get_profile 'image,-text' %}
+    {% endfor %}
+    </div>
+    <div class="grid_5 alpha omega"><br/></div>
+    {% endif %}
+
+   <div class="grid_5 alpha omega"><br/></div>
+    <div class="grid_5 alpha" style="margin-left:-10px">
+
+        <!-- medium_rectangle -->
+        <div id='div-gpt-ad-1319891242082-0' style='width:300px; height:250px;'>
+        <script type='text/javascript'>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1319891242082-0'); });
+        </script>
+        </div>
+
+    </div>
+
+
+{% endblock sidebar %}

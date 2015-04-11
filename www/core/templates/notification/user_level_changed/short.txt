@@ -1,0 +1,1 @@
+{{user.get_profile.title}} reached {{user.get_profile.level_name}}({{ user.get_profile.level }}) status

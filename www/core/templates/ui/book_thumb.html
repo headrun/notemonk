@@ -1,0 +1,14 @@
+{% load tags %}
+
+<a href="/book/{{ book.id }}/{{ book.title }}/">
+    <img alt="{{ book.title }}"
+         src="{{ book.cover_image|thumbnail:'150x150' }}"
+         rel="book_thumb_{{ book.id }}"
+         class="captify book_thumb"/>
+</a>
+<div id="book_thumb_{{ book.id }}">
+    <a href="/book/{{ book.id }}/{{ book.title }}/" class="thumblink">
+        {{ book.title|truncatewords:10 }}
+    </a>
+</div>
+

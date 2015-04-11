@@ -1,0 +1,1 @@
+{{ post.user.get_profile.title }} posted on "{{ post.profile.title }}"'s page

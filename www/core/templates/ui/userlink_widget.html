@@ -1,0 +1,6 @@
+{% load tags %}
+
+<span class="userlink">
+<a href="/user/{{ user.username }}/"><big>{{ user.get_profile.title }}</big></a>
+{{ user.get_profile.level_name }} ({{ user.get_profile.level }})
+</span>

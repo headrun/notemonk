@@ -1,0 +1,47 @@
+<form style="display:none" name="rate_{{ target.ctype.id }}_{{ target.id }}" action="/rate/" method="post">
+    <input type="hidden" name="ref_path" value="{{ ref_path }}">
+    <input type="hidden" name="target_type" value="{{ target.ctype.id }}">
+    <input type="hidden" value="{{ target.id }}" name="target">
+    <input type="hidden" value="{{ ref_path }}" name="path">
+
+    <input type="hidden" value="" name="rating">
+    
+</form>
+
+<script>
+function rate(value, form_name)
+{
+    var form = document.forms[form_name];
+    form.rating.value = value;
+    form.submit()
+}
+</script>
+
+{% if rating %}
+
+    {% ifequal rating "up" %}
+        <a href="/up/{{ target.ctype.id }}/{{ target.id }}/" style="text-decoration: none">{{ target.up_count }}</a>
+        <img title="Like" src="/static/images/thumbup.png"/>,
+        <a href="/down/{{ target.ctype.id }}/{{ target.id }}/" style="text-decoration: none">{{ target.down_count }}</a>
+        <img title="Unlike" src="/static/images/thumbdown_grey.png"/>
+    {% else %}
+        <a href="/up/{{ target.ctype.id }}/{{ target.id }}/" style="text-decoration: none">{{ target.up_count }}</a>
+        <img title="Like" src="/static/images/thumbup_grey.png"/>,
+        <a href="/down/{{ target.ctype.id }}/{{ target.id }}/" style="text-decoration: none">{{ target.down_count }}</a>
+        <img title="Unlike" src="/static/images/thumbdown.png"/>
+    {% endifequal %}
+
+{% else %}
+    {% ifequal target user.get_profile %}
+        <a href="/up/{{ target.ctype.id }}/{{ target.id }}/" style="text-decoration: none">{{ target.up_count }}</a>
+        <img title="Like" src="/static/images/thumbup_grey.png"/>,
+        <a href="/down/{{ target.ctype.id }}/{{ target.id }}/" style="text-decoration: none">{{ target.down_count }}</a>
+        <img title="Unlike" src="/static/images/thumbdown_grey.png"/>
+    {% else %}
+        <a href="/up/{{ target.ctype.id }}/{{ target.id }}/" style="text-decoration: none">{{ target.up_count }}</a>
+        <img title="Like" class="rateimage" onclick="javascript: rate('up', 'rate_{{ target.ctype.id }}_{{ target.id }}'); return false;" src="/static/images/thumbup_grey.png"/>,
+        <a href="/down/{{ target.ctype.id }}/{{ target.id }}/" style="text-decoration: none">{{ target.down_count }}</a>
+        <img title="Unlike" class="rateimage" onclick="javascript: rate('down', 'rate_{{ target.ctype.id }}_{{ target.id }}'); return false;" src="/static/images/thumbdown_grey.png"/>
+    {% endifequal %}
+
+{% endif %}

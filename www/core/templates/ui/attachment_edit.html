@@ -1,0 +1,52 @@
+{% extends "ui/base.html" %}
+
+{% load tags %}
+
+{% block title %}
+<div class="grid_11 alpha">
+    <span class="title">{{ attachment.title }}</span><br/>
+    <span>to {% render attachment.target %}</span>
+</div>
+{% endblock title %}
+
+{% block content %}
+    <div class="grid_11 alpha"><br/></div>
+
+    <div class="grid_11 alpha">
+    <form action="" method="POST" enctype="multipart/form-data">
+        <table width="100%" class="form">
+            <tr>
+                <td>Title</td>
+                <td>
+                    <input type="text" name="title" value="{{ title }}"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                Description
+                <textarea id="att_desc" name="description">{{ description }}</textarea>
+                </td>
+            </tr>
+            {% if not attachment.uploaded_file %}
+            <tr>
+                <td>Url</td>
+                <td>
+                    <input type="input" name="url" value="{{ url }}"/>
+                </td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Update"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+    </div>
+
+    {% markup 'att_desc' '' %}
+
+{% endblock content %}
+
+{% block sidebar %}
+{% endblock %}

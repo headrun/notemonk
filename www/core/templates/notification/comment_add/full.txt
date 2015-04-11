@@ -1,0 +1,10 @@
+{{ comment.user.get_profile.title}} commented
+
+"{{ comment.text|striptags }}"
+
+on
+
+"{{ comment.target.title }}"
+
+To comment or see, click here:
+http://{{ current_site }}{{ comment.link }}

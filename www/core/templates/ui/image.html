@@ -1,0 +1,46 @@
+{% extends "ui/base.html" %}
+
+{% block content %}
+{% load tags %}
+<div class="grid_16">
+    <div class="grid_11 alpha">
+        <div id="title-header">
+
+            <h1 id="title-text">{{image.title}}</h1>
+
+            <div class="cat-box">
+                <span id="page-categories">
+                    <span class="category-header">Categories:</span>
+                    <a href="/category/science" class="bread-crumb-url bread-crumb-url-hover">Science</a>
+                    <span class="bread-crumb-pipe">|</span>
+                    <a href="/category/physics" class="bread-crumb-url bread-crumb-url-hover">Physics</a>
+                </span>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="grid_11">
+     <div class="grid_11 alpha">
+        <img alt="No Image" src="{{ image.file.url }}"/>
+
+    </div>
+    <div class="grid_11 alpha note">
+            text
+    </div>
+</div>
+
+<div class="grid_5">
+
+    <div class="any-question-text">
+        ask any question
+    </div>
+    <div class="any-question-form">
+        <img alt="" class="any-question-arrow" src="http://cdn.mahalo.com/content/skins/mahalo/images/clear.gif">
+        <textarea onkeyup="textCounter(this, $('#textCounter'),140);" onkeydown="textCounter(this, $('#textCounter'),140);" onfocus="check_txtarea(this)" class="any-question-textarea" cols="20" rows="15" id="any_question" name="question_text" onblur="check_txtarea(this)">about {{image.title}}...</textarea>
+    </div>
+</div>
+
+{% endblock content %}

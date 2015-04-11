@@ -1,0 +1,29 @@
+{% load tags %}
+{% load filters %}
+
+{% if not flags.is_more %}
+
+    <a href="{{ obj.link }}">{{ obj.text|truncatesmart:'50' }}</a>
+
+{% else %}
+
+    {{ obj.text }}
+
+    {% if flags.is_dateadded %}
+    <br>
+    {% if flags.is_dateadded %}
+        {{ obj.date_added|dt }}
+    {% endif %}
+    {% endif %}
+    
+    {% if flags.is_rate %}
+        {% rate obj %}
+    {% endif %}
+
+    <a href="{{ obj.link }}">link</a>
+
+    {% if flags.is_comment %}
+        {% comment obj 'image,commentbox' %}
+    {% endif %}
+
+{% endif %}

@@ -1,0 +1,10 @@
+{{user.get_profile.title}} is requesting your permission to become a moderator for your book.
+
+Book: {{ book.title }}
+http://{{ current_site }}{{ book.link }}
+
+To accept the request click on the below link,
+http://{{ current_site}}/book/confirm-moderation/{{ book.id }}/{{ user.username }}/
+
+To see more information about the user click below link,
+http://{{ current_site }}{{ user.link }}

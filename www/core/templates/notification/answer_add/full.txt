@@ -1,0 +1,12 @@
+{{ user.get_profile.title }} answered
+
+"{{ answer.text|striptags }}"
+
+for the question
+
+"{{ question.text|striptags }}"
+
+under "{{ question.target.title }}"
+
+To add a better answer to this question, click here:
+http://{{ current_site }}{{ question.link }}

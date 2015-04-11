@@ -1,0 +1,34 @@
+{% extends "renderables/group_base.html" %}
+
+{% load tags %}
+{% load filters %}
+
+{% block digest %}
+    {% for user, rating_groups in groups %}
+       
+	<span class="roundedges" style="float:left;padding:5px;background:#F5F5F5;border:1px solid #e3e3e3;margin:0px 5px;">
+	    <span style="float:left;position:absolute">{% render user.get_profile 'image,-text,-more' %}</span>
+	    <span style="float:left;padding-right:5px">
+		<span style="float:left;margin-left:38px">{% render user.get_profile '-image,text,-more' %}</span><br/>
+ 	        <span style="float:left;margin-left:38px">
+        	    {% for rating, activity_group in rating_groups.items %}
+
+            		{% if activity_group %}
+                	    <em>{{ rating }}</em>&nbsp;
+                	    {% for objtype, activities in activity_group.items %}
+
+                    		{{ activities|length }} {{ objtype }}{{ activities|pluralize }}
+                    		{% if not forloop.last %}, {% endif %}
+                	    {% endfor %}
+            		{% endif %}
+
+            		{% if not forloop.last %}, {% endif %}
+        	    {% endfor %}
+        
+        	    {% if not forloop.last %}, {% endif %}
+		</span>
+	    </span>
+	</span>
+    {% endfor %}
+{% endblock digest %}
+

@@ -1,0 +1,44 @@
+{% extends "ui/base.html" %}
+{% load tags %}
+
+{% block title %}
+    <h1 class="group-title">UPSC Books</h1>
+{% endblock title %}
+
+{% block content %}
+
+   <span style="color:#333" class="group-caption"> All <strong>UPSC books</strong> listed below are available for <strong>download</strong>.</span>
+
+    {% bookshelf 'UPSC' 'all' 'UPSC Books' 8 %}
+
+{% endblock content %}
+
+{% block sidebar %}
+
+    Notemonk is an exciting new way to learn your textbooks.
+    <ul>
+        <li><strong>Download books</strong> to your computer
+        <li><strong>Ask questions</strong> on any topic in the text book
+        <li><strong>Watch videos</strong> related to difficult topics
+        <li><strong>Prepare notes</strong> for quick reference before exams
+    </ul>
+    <div align="center">
+        <img alt="Notemonk" src="/static/images/notemonk_mascot_medium.png"/>
+    </div>
+    
+    <div class="grid_5 omega gad">
+
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-2945383363046281";
+        /* 300 x 250, notemonk box listing page bottom */
+        google_ad_slot = "9649030723";
+        google_ad_width = 300;
+        google_ad_height = 250;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+
+    </div>
+{% endblock sidebar %}

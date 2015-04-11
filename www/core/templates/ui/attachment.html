@@ -1,0 +1,76 @@
+{% extends "ui/base.html" %}
+
+{% load tags %}
+{% load filters %}
+
+{% block title %}
+
+<div class="grid_11 alpha" style="text-align:center">
+    <span class="title">{{ attachment.title }}</span>
+    (
+    <span>{% rate attachment %}, </span>
+    <span>{% flag attachment %}</span>)
+    
+    {% if is_editable %}
+    <div style="float: right; position: relative; top: 7px;">
+        <a href="{{ attachment.edit_link }}" class="button">
+            <img src="/static/images/edit.png"/>
+        </a>
+        &nbsp;
+    </div>
+    {% endif %}
+
+    <div>
+        <span>for {% render attachment.target %}</span>
+        <span>by {% render attachment.attacher.get_profile %}</span>,
+        added <span>{{ attachment.date_added|dt}} </span>
+    </div>
+</div>
+{% endblock title %}
+
+{% block content %}
+
+<div class="grid_11 alpha" style="margin:10px 0px">
+    {% if attachment.description %}
+    {{ attachment.description }}
+    <div class="grid_11 alpha hrdiv"></div>
+    {% endif %}
+</div>
+
+<div class="grid_11 alpha">
+<center>
+    <a href="{% if attachment.url %}{{ attachment.url }}{% else %}{{ attachment.uploaded_file.file.url }}{% endif %}" style="text-decoration: none">
+        <img src="/static/images/download.png" alt="Download" title="Download"/><br/>
+        {% if attachment.url %}{{ attachment.url }}{% else %}{{ attachment.uploaded_file.file.url }}{% endif %}
+    </a>
+</center>
+</div>
+
+<div class="grid_11 alpha"><br/></div>
+
+<div class="grid_11 alpha">
+{% question attachment attachment.title 5 %}
+</div>
+
+
+{% endblock content %}
+
+{% block sidebar %}
+
+<div class="grid_5 alpha gad">
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2945383363046281";
+/* 300 x 250, notemonk box listing page bottom */
+google_ad_slot = "9649030723";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+</div>
+
+{% endblock sidebar %}

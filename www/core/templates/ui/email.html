@@ -1,0 +1,47 @@
+{% extends "ui/base.html" %}
+{% load tags %}
+
+{% block content %}
+
+<div class="grid_11 alpha">
+    <br/>
+</div>
+
+<div class="grid_11 alpha form">
+
+    <form action="/email/" method="POST">
+        <input type="hidden" name="ref_path" value="{{ next }}" />
+        <table width="100%">
+            {{ form.as_table }}
+        </table>
+        <div align="center">
+            <input type="submit" value="Submit"/>
+        </div>
+    </form>
+
+</div>
+
+<div class="grid_11 alpha omega"><br></div>
+Become a Top User
+<br>
+{% for f in top_users|slice:'18' %}
+<a href="{{ f.link }}" title="{{ f.title }}">
+    {% if f.image %}
+    <img src="{{ f.image|thumbnail:'32x32' }}"/>
+    {% else %}
+    <img src="{{ '/static/images/user.png'|thumbnail:'32x32' }}"/>
+    {% endif %}
+</a>
+{% endfor %}
+
+{% endblock content %}
+
+{% block sidebar %}
+<div class="subtitle">&nbsp;&nbsp;&nbsp;Why enter Email?</div>
+<ul>
+    <li><strong>Get answers</strong> for your questions in your inbox.
+    <li><strong>Stay up-to-date</strong> on new books, notes, videos, questions and answers.
+    <li><strong>Make friends</strong>, find monks or collect followers.
+    <li><strong>Earn points</strong> and grow your status to win exciting prizes.
+</ul>
+{% endblock %}

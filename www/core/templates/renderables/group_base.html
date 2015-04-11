@@ -1,0 +1,40 @@
+
+{% load filters %}
+{% load tags %}
+
+{% block digest %}
+{% endblock %}
+
+{% block activities %}
+    
+    <div class="group-expand">
+	<a href="#" style="" id="ag_see_{{ activities.0.id }}">expand</a>
+    </div>
+
+    <div class="grid_11 alpha omega">
+
+        <div id="ag_{{ activities.0.id }}" class="expanded-group roundedges">
+                      
+            {% for a in activities %}
+                {% render a 'image,more,-flag,-addedby,context' %}
+
+                {% if not forloop.last %}
+		<div class="grid_11 alpha hrdiv"></div>
+                <div class="grid_11 alpha"><br/></div>
+                {% else %}
+		<div class="group-collapse">           
+                        <a href="#" id="ag_hide_{{ activities.0.id }}">collapse</a>
+                </div>	
+		{% endif %}
+            {% endfor %}
+       
+	 </div>
+
+        <script>
+            $(document).ready(function(){
+                setup_showhide('#ag_see_{{ activities.0.id }}', '#ag_hide_{{ activities.0.id }}', '#ag_{{ activities.0.id }}');
+            })
+        </script>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% load filters %}
+
+<div class="pages">
+    {% if items.paginator.num_pages|gt:"1" %}
+
+    {% if items.has_previous %}
+    <span class="nextprev" style="float:left">
+        <a href="{{ previous_link }}">previous</a>
+    </span>
+    {% endif %}
+
+    <span class="current">
+     <!--   Page {{ items.number }} of {{ items.paginator.num_pages }}.-->
+    </span>
+    <script>
+	var num={{ items.paginator.num_pages}};
+	var html="<ul class='paginator'>";
+	var url="{{ next_link }}";
+	url=url.slice(0,-2);
+	for(var i=1;i<=num;i++)
+	{
+		html+="<li id='paginator-li-"+i+"' ><a href='"+url+""+i+"/' style='color:#333'>"+i+"</a></li>";
+	}
+	html+="</ul>";
+	$(".pages .current").append(html);
+	$("#paginator-li-{{ items.number }}").addClass("currpage");
+	
+    </script>
+    {% if items.has_next %}
+    <span class="nextprev" style="float:left">
+        <a href="{{ next_link }}">next</a>
+    </span>
+    {% endif %}
+
+    {% endif %}
+</div>

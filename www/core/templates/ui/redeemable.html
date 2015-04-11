@@ -1,0 +1,59 @@
+{% extends "ui/base.html" %}
+
+{% load tags %}
+
+{% block title %}
+<div class="grid_11 alpha">
+    <span class="title">{{ redeemable.title }}</span>
+    {% if redeemable.num %}
+    (<a href="/cart/add/{{ redeemable.id }}/?next={{ ref_path }}">add to cart</a>)
+    {% endif %}
+    <br/>
+    <big><strong>{{ redeemable.credits }}</strong></big> credits,
+    <big><strong>{{ redeemable.num }}</strong></big> available
+</div>
+{% endblock title %}
+
+{% block content %}
+
+<div class="grid_11 alpha">
+    <center>
+        <img src="{{ redeemable.image|thumbnail:'500x500' }}"/>
+    </center>
+
+    {{ redeemable.description }}
+</div>
+
+{% endblock content %}
+
+{% block sidebar %}
+{% cart %}
+    <div class="grid_5 omega">
+        <div class="grid_5 alpha omega"><br/></div>
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-2945383363046281";
+        /* redeemables right first */
+        google_ad_slot = "6982616791";
+        google_ad_width = 250;
+        google_ad_height = 250;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-2945383363046281";
+        /* redeemables right second */
+        google_ad_slot = "2727111707";
+        google_ad_width = 250;
+        google_ad_height = 250;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+
+    </div>
+
+{% endblock %}

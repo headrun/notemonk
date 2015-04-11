@@ -1,0 +1,99 @@
+{% load tags %}
+{% load filters %}
+
+<div class="grid_1 alpha">
+    {% render obj.user.get_profile 'image,-text,more' %}
+</div>
+
+<div class="grid_9 omega" style="padding:0px 10px;">
+    <span style="float:left">
+    {% render obj.user.get_profile %}    </span><span class="stream-date" style="">{{ obj.date_added|dt }}</span>
+
+    
+    {% ifequal obj.target|cname 'ProfilePost' %}
+        {% ifequal obj.target.user obj.target.target.user %}
+            {% render obj.target 'more' %}
+        {% else %}
+            &gt; {% render obj.target.target.user.get_profile %}: {% render obj.target 'more' %}
+        {% endifequal %}
+    {% endifequal %}
+    
+    {% ifequal obj.target|cname 'Comment' %}
+        <span style="float:left">commented on
+        <span class="light">
+        {{ obj.target.target|cname }}:
+        {% render obj.target.target '-dateadded' %}
+        </span>
+	</span>
+        <br>
+	<span style="float:left">
+        {{ obj.target.text }}
+	</span>
+	<span><a href="{{ obj.target.link }}">comment</a> . {{obj.target.date_added|dt }}</span>
+     {% endifequal %}
+
+    {% ifequal obj.target|cname 'Question' %}
+        <span style="float:left;padding-left:5px">asked</span><br/>
+        <div style="float:left;padding-top:5px"> {% render obj.target 'more,instream' %}</div>
+    {% endifequal %}
+
+    {% ifequal obj.target|cname 'Answer' %}
+        <span style="float:left;padding-left:5px">answered</span><br/>
+        <div style="float:left;padding-top:5px"> {% render obj.target 'more,instream' %}</div>
+    {% endifequal %}
+
+    {% ifequal obj.target|cname 'Ratings' %}
+        <span style="float:left;padding-left:5px">{{ obj.target.verb }} {% render obj.target.target.user.get_profile %}'s {{ obj.target.target|cname }}: {% render obj.target.target '-dateadded' %}</span>
+        <br>
+       {{ obj.target.date_added|dt }}
+        {% rate obj.target.target %}
+    {% endifequal %}
+
+    {% ifequal obj.target|cname 'Follows' %}
+        {{ obj.target.verb }} {% render obj.target.target %}
+        <br>
+        {{ obj.target.date_added|dt }}
+        {% follow obj.target.target %}
+    {% endifequal %}
+
+    {% ifequal obj.target|cname 'Flags' %}
+        {{ obj.target.verb }} {% render obj.target.target '-dateadded' %}
+        <br>
+        {{ obj.target.date_added|dt }}
+        flag {% flag obj.target.target %}
+    {% endifequal %}
+    
+    {% ifequal obj.target|cname 'Attachment' %}
+        {{ obj.target.verb }} {% render obj.target 'more,-dateadded,-addedby' %}
+        <br>
+        {{ obj.date_added|dt }}
+    {% endifequal %}
+
+    {% ifequal obj.target|cname 'Redemption' %}
+        {{ obj.target.verb }} {% for item in obj.target.items.all %}{% render item %}{% if not forloop.last %}, {% endif %}{% endfor %}
+        <br>
+        {{ obj.date_added|dt }}
+        <a href="/redeem/">redeem</a>
+    {% endifequal %}
+
+    {% ifequal obj.target|cname 'Book' %}
+        added book<br/>
+        {% render obj.target 'image' %}
+        <br/><a href="/book/add/">Add a book yourself</a>
+    {% endifequal %}
+    
+    {% ifequal obj.target|cname 'Note' %}
+       <span style="float:left;padding-left:5px;padding-right:5px"> added </span>{% render obj.target 'more,-addedby,-rate,-flag,-dateadded' %}
+    {% endifequal %}
+
+    {% ifequal obj.target|cname 'PointsHistory' %}
+        <span style="float:left;padding-left:5px">got points</span><br/>
+        {% render obj.target 'more' %}
+    {% endifequal %}
+
+    {% ifequal obj.target|cname 'AssociatedMedia' %}
+        <span style="float:left;padding-left:5px">added video</span><br/>
+        <div style="float:left;padding-top:10px">{% render obj.target 'image,instream' %}</div>
+    {% endifequal %}
+    
+</div>

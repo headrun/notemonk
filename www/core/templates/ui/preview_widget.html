@@ -1,0 +1,16 @@
+{% if url %}
+<a onclick="$(this).next('#myModal').modal()" class="label label-primary" style="padding:5px;background: #08C !important;">Preview</a>
+ <div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:940px;left:40%;overflow-y:hidden;top:37%">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Preview</h4>
+        </div>
+        <div class="modal-body" style="height:1000px">
+            <iframe src="{{ url }}" width="900px" height="400px"  style="border:0px!important"></iframe>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+{% endif %}

@@ -1,0 +1,4 @@
+{% load tags %}
+{% load filters %}
+{% render obj.user.get_profile %} redeemed {% for item in obj.items.all %} {% render item %}, {% endfor %}<br/>
+{{ obj.date_added|dt }}

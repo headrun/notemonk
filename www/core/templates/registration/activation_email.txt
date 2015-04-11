@@ -1,0 +1,10 @@
+Hi,
+
+We are excited about you joining the Notemonk community. You are only one step away from that. Click on the activation link below to complete the joining process.
+
+http://www.notemonk.com/accounts/activate/{{ activation_key }}/
+
+If the link above is not clickable just copy it and paste into your browser and navigate.
+
+Waiting to see you there,
+Notemonk community

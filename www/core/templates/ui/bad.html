@@ -1,0 +1,88 @@
+<html>
+	<head>
+	<style>
+		
+		body{
+
+			font-family : Georgia "Times New Roman";
+			font-size : 12px;
+			line-height : 18px;
+			background-image : url("/static/images/bad/bad_bg.png");
+			overflow:hidden;
+			margin:0px;
+			padding:0px;
+			color:#333;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			-o-user-select: none;
+			user-select: none;	
+		}
+		#Headrun_ad_container{
+			
+			padding : 10px;
+			background : white;
+			overflow : hidden;
+			border : 1px solid #333;
+			background:black;
+		
+		}
+		.roundedges{
+
+			border-radius : 5px;
+			-webkit-border-radius : 5px;
+			-moz-border-radius : 5px;
+			-o-border-radius : 5px;
+
+		}
+		.shadow
+		{
+			box-shadow: 0px 0px 10px #999;
+			-webkit-box-shadow: 0px 0px 10px #999;
+			-moz-box-shadow: 0px 0px 10px #999;
+			-o-box-shadow: 0px 0px 10px #999;
+		}
+		.header{
+
+			border-bottom : 1px solid #333;
+			overflow: hidden;
+
+		}
+		a, a:hover{
+			color:#333;
+			text-decoration:none;
+		}
+
+	</style>
+	</head>
+	<body>
+	<div id="Headrun_ad_container" class="roundedges shadow" style="width:250px;margin-left:270px;">
+		<div class="header">
+			<a href="http://bit.ly/KlFIt1" target="_blank" style="float : left;color:#fff;font-weight:bold"><img src="/static/images/bad/learnnext.png"/></a>
+			<a id="close" style="float : right;cursor:pointer;color:#fff;font-size:16px">x</a>
+		</div>
+	
+	<a target="_blank" href="http://bit.ly/KlFIt1">
+		<div>
+			<img src="/static/images/bad/girl.png" style="padding-right:10px;height:100px;float:left"/>
+			<p style="float-left;padding-left:10px;color:#3c90d7">
+				Maths &amp Science</br>
+				CBSE / ICSE / Stateboards </br>
+				Class 6th to 10th
+			</p>
+		</div>
+	</div>
+	</a>
+	<script src="http://static.notemonk.com/js/jquery-1.7.1.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#Headrun_ad_container").animate({"margin-left":"-=270px"},"slow");
+			$("#close").click(function(){
+				 $("#Headrun_ad_container").animate({"margin-left":"+=270px"},"slow");
+			});
+		});
+	</script>
+	</body>
+</html>

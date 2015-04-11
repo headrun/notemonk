@@ -1,0 +1,36 @@
+
+{% load filters %}
+{% load tags %}
+
+<style type="text/css">
+    .{{ button_class }}
+    {
+        background-color: #{{ color }};
+        color: #{{ tcolor }};
+        border-top: {{ borderwidth }} solid #{{ blight }};
+        border-left: {{ borderwidth }} solid #{{ blight }};
+        border-right: {{ borderwidth }} solid #{{ bdark }};
+        border-bottom: {{ borderwidth }} solid #{{ bdark }};
+        text-decoration: none;
+        white-space: nowrap;
+        padding: 2px 2px;
+        margin: 2px 2px 2px 0px;
+        line-height: 2;
+    }
+
+    .{{ button_class }}:hover
+    {
+        background-color: #{{ hcolor }};
+        color: #{{ htcolor }};
+        border-top: {{ borderwidth }} solid #{{ hblight }};
+        border-left: {{ borderwidth }} solid #{{ hblight }};
+        border-right: {{ borderwidth }} solid #{{ hbdark }};
+        border-bottom: {{ borderwidth }} solid #{{ hbdark }};
+        text-decoration: none;
+        white-space: nowrap;
+    }
+</style>
+
+<a href="{{ link }}" title="{{ title }}" class="{{ button_class }}">
+    {{ buttontext|safe }}
+</a>

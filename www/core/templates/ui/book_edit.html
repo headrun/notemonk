@@ -1,0 +1,201 @@
+{% extends "ui/base.html" %}
+
+{% load tags %}
+
+{% block jsinit %}
+
+$('#id_tags').tokenInput('/tags/', {
+    theme:"facebook",
+    crossDomain:true,
+    prePopulate: {{ tags|safe }},
+});
+
+$('#id_moderators').tokenInput('/users/', {
+    theme:"facebook",
+    crossDomain:true,
+    prePopulate: {{ moderators|safe }},
+});
+
+
+delayed_topic_rename = function()
+{
+    cb = function() {
+        t = $.tree.reference('#book_tree');
+        if (t.selected) { t.rename() };
+    }
+    window.setTimeout(cb, 100); 
+}
+
+function create_node(t, where)
+{
+    if(t.selected)
+    {
+        x = t.create(false, null, where);
+        delayed_topic_rename();
+    }
+    
+    return false;
+}
+
+$("#book_tree").tree(
+    {
+        data:       {
+                        type: "json",
+                        opts:   {
+                                    static: {{ book.outline_json|safe }},
+                                },
+                    },
+
+        ui:         {
+                        dots: false,
+                        theme_name: "apple",
+                    },
+
+        types:      {
+                    },
+
+        rules:      {
+                        multiple: false,
+                        drag_copy: false,
+                    },
+
+        lang:       {
+                        new_node: "New Topic",
+                    },
+
+        plugins:    {
+                        contextmenu: {},
+                        hotkeys:    {
+                                        hover_move: true,
+                                        functions:      {
+                                                            "shift+return": function() { return create_node(this, "inside"); },
+                                                            "return": function() { return create_node(this, "after"); },
+                                                        },
+                                    }
+                    },
+    }
+);
+
+/* To make sure that tags widget does not steal focus on load of page */
+$("#id_title").focus();
+$("#id_title").blur();
+{% endblock jsinit %}
+
+{% block title %}
+
+<div class="grid_11 alpha">
+    <a href="{{ book.link }}" style="text-decoration: none">
+    <span class="title">
+        {{book.title}}
+    </span>
+    </a>
+
+    <div style="float: right; position: relative; top: 7px;">
+        <a href="{{ book.link }}" class="button">
+            <img src="/static/images/view.png"/>
+        </a>
+    </div>
+</div>
+
+{% endblock title %}
+
+{% block content %}
+
+<br/>
+
+<script>
+    function submit_outline()
+    {
+        var form = document.forms["book_tree_edit"];
+        var data = $.tree.reference("#book_tree").get();
+        data = $.toJSON(data);
+        form.outline_data.value = data;
+        form.submit();
+    }
+
+    function create_new_subtopic(button)
+    {
+        var t = $.tree.reference("#book_tree")
+
+        if (t.selected)
+            x = t.create(false);
+        else
+            x = t.create(false, -1);
+
+        delayed_topic_rename();
+
+        button.blur();
+    }
+
+    function create_new_topic(button)
+    {
+    
+        var t = $.tree.reference("#book_tree")
+
+        if (t.selected)
+            x = t.create(false, null, "after");
+        else
+            x = t.create(false, -1);
+
+        delayed_topic_rename();
+
+        button.blur();
+
+    }
+
+    function delete_topic(button)
+    {
+        var t = $.tree.reference("#book_tree")
+        if (t.get().length != 0)
+            t.remove(t.selected);
+
+        button.blur();
+    }
+</script>
+
+<div class="grid_11 alpha slight-emphasize">
+
+    <div class="grid_11 alpha">
+        <form method="POST" action="{{ book.edit_link }}" name="book_tree_edit">
+            <input type="hidden" name="outline_data" value=""/>
+            
+            <div>
+                <input type="button" value="Create New Topic" onclick="javascript: create_new_topic(this); return false;"/>
+                <input type="button" value="Create New Subtopic" onclick="javascript: create_new_subtopic(this); return false;"/>
+                <input type="button" value="Delete Topic" onclick="javascript: delete_topic(this); return false;"/>
+                <input type="button" value="Discard Changes" onclick="javascript: location.reload(true); return false;"/>
+                <input type="submit" value="Save" onclick="javascript: submit_outline(); return false;"/>
+            </div>
+        </form>
+        <div class="hrdiv"></div>
+        <br/>
+    </div>
+
+    <div class="grid_11 alpha" id="book_tree">
+    </div>
+
+    <div class="grid_11 alpha"><br/></div>
+
+</div>
+
+{% endblock content %}
+
+{% block sidebar %}
+   
+    <div class="grid_5 omega">
+    <center>
+        <img src="{{ book.cover_image|thumbnail:'150x150' }}"/>
+    </center>
+    </div>
+
+    <div class="grid_5 omega form">
+        <form enctype="multipart/form-data" action="{{ book.edit_link }}" method="POST">
+            {{ form.as_p }}
+            <div align="right">
+            <input style="width:60px;height:25px" type="submit" value="Update"/>
+            </div>
+        </form>
+    </div>
+  
+
+{% endblock sidebar %}

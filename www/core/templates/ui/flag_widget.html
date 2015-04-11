@@ -1,0 +1,26 @@
+<form style="display:none" name="flag_{{ target.ctype.id }}_{{ target.id }}" action="/flag/" method="POST">
+    <input type="hidden" name="ref_path" value="{{ ref_path }}">
+    <input type="hidden" name="target_type" value="{{ target.ctype.id }}">
+    <input type="hidden" value="{{ target.id }}" name="target">
+    <input type="hidden" value="{{ ref_path }}" name="path">
+
+    {% if not flagged %}
+    <input type="hidden" value="flag" name="flag">
+    {% else %}
+    <input type="hidden" value="unflag" name="flag">
+    {% endif %}
+    
+</form>
+
+{{ target.flagcount }}
+{% ifequal target user.get_profile %}
+<img title="Flag as inappropriate" class="flagimage" src="/static/images/flag_grey.png"/>
+{% else %}
+
+{% if not flagged %}
+<img title="Flag as inappropriate" class="flagimage" onclick="javascript:document.forms['flag_{{ target.ctype.id }}_{{ target.id }}'].submit();return false;" src="/static/images/flag_grey.png"/>
+{% else %}
+<img title="Flagged as inappropriate" class="flagimage" onclick="javascript:document.forms['flag_{{ target.ctype.id }}_{{ target.id }}'].submit();return false;" src="/static/images/flag.png"/>
+{% endif %}
+
+{% endifequal %}

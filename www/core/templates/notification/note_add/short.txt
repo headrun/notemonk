@@ -1,0 +1,1 @@
+{{user.get_profile.title}} added note for "{{note.target.title}}"

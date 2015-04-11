@@ -1,0 +1,4 @@
+{% load tags %}
+
+<a class="username" href="{{ obj.user.get_profile.link }}">{{ obj.user.get_profile.title }}</a> flagged {% render obj.target %}<br/>
+{{ obj.date_added|dt }}

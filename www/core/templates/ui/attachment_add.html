@@ -1,0 +1,45 @@
+{% extends "ui/base.html" %}
+
+{% load tags %}
+
+{% block title %}
+<div class="grid_11 alpha">
+    <span class="title">Add Attachment</span><br/>
+    <span>to {% render target %}</span>
+</div>
+{% endblock title %}
+
+{% block content %}
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        <table width="100%" class="form">
+            <tr>
+                <td>Url</td>
+                <td>
+                    <input type="text" name="url" value="{{ url }}"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <strong>(or)</strong>
+                </td>
+            </tr>
+            <tr>
+                <td>Upload</td>
+                <td>
+                    <input type="file" name="file" onchange="this.form.submit();"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Add"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+{% endblock content %}
+
+{% block sidebar %}
+<strong>Note</strong>: Please do not attach copyrighted material.
+{% endblock %}

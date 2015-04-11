@@ -1,0 +1,1 @@
+You have earned {{ credits }} credits!

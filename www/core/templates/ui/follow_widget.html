@@ -1,0 +1,20 @@
+<form style="display:none" name="follow_{{ target.ctype.id }}_{{ target.id }}" action="/follow/" method="POST">
+    <input type="hidden" name="ref_path" value="{{ ref_path }}">
+    <input type="hidden" name="target_type" value="{{ target.ctype.id }}">
+    <input type="hidden" value="{{ target.id }}" name="target">
+    <input type="hidden" value="{{ ref_path }}" name="path">
+
+    {% if not followed %}
+    <input type="hidden" value="follow" name="follow">
+    {% else %}
+    <input type="hidden" value="unfollow" name="follow">
+    {% endif %}
+    
+</form>
+
+<a href="/followers/{{ target.ctype.id }}/{{ target.id }}/" style="text-decoration: none">{{ target.followcount }}</a>
+{% if not followed %}
+<img title="Follow" class="followimage" onclick="javascript:document.forms['follow_{{ target.ctype.id }}_{{ target.id }}'].submit();return false;" src="/static/images/follow_grey.png"/>
+{% else %}
+<img title="Unfollow" class="followimage" onclick="javascript:document.forms['follow_{{ target.ctype.id }}_{{ target.id }}'].submit();return false;" src="/static/images/follow.png"/>
+{% endif %}

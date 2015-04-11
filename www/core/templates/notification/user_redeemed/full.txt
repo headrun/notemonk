@@ -1,0 +1,7 @@
+{{ user.get_profile.title}} who is {{ user.get_profile.level }} with {{ user.get_profile.points }} points has redeemed the credits they earned!
+
+See what they got,
+http://{{ current_site}}{{ redemption.link }}
+
+See the profile page,
+http://{{ current_site }}{{ user.get_profile.link }}

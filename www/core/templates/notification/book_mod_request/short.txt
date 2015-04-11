@@ -1,0 +1,1 @@
+Book moderation request from {{user.get_profile.title}}

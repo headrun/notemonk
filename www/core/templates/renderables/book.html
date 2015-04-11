@@ -1,0 +1,79 @@
+{% load tags %}
+{% load filters %}
+
+{% if flags.is_image or flags.is_bcard%}
+
+<div style="float: left;">
+    {% if flags.is_more %}
+    
+	<a href="{{ obj.link }}">
+	    <img alt="{{ obj.title }}"
+		 title="{{ obj.title }}"
+		 src="{{ obj.cover_image|thumbnail:'150x150' }}"
+		 rel="book_thumb_{{ obj.id }}"
+		 class="{% if flags.is_overlay %} captify {% endif %} book_thumb"/>
+	</a>
+	
+	{% if flags.is_overlay %}
+	    <div id="book_thumb_{{ obj.id }}">
+		<a href="{{ obj.link }}" class="thumblink">
+		    {{ obj.title|truncatesmart:'50' }}
+		</a>
+	    </div>
+	{% endif %}
+
+    {% else %}
+    
+	<a href="{{ obj.link }}">
+	    <img alt="{{ obj.title }}"
+		title="{{ obj.title }}"
+		src="{{ obj.cover_image|thumbnail:'75x75' }}"
+		class="book_thumb"/>
+	</a>
+	
+    {% endif %}
+</div>
+
+{% endif %}
+
+{% if flags.is_text %}
+    {% if not flags.is_more %}
+
+	<a href="{{ obj.link }}">{{ obj.title|truncatesmart:'50' }}</a>
+	{% if flags.is_dateadded %}
+	{{ obj.date_added|dt }}
+	{% endif %}
+
+    {% else %}
+
+	<a href="{{ obj.link }}">{{ obj.title }}</a>
+
+	{% if flags.is_rate %}
+	    {% rate obj %}
+	{% endif %}
+       
+	{% if flags.is_flag %}
+	    {% flag obj %}
+	{% endif %}
+	
+	{% if flags.is_follow %}
+	    {% follow obj %}
+	{% endif %}
+       
+	{% if flags.is_addedby %}
+	    added by {% render obj.user.get_profile %}
+	{% endif %}
+
+	{% if flags.is_dateadded %}
+	    {{ obj.date_added|dt }}
+	{% endif %}
+	
+	{% if flags.is_context %}
+	    <br/>
+	    {% for t in obj.tags.all %}
+		<span class="tag">{{ t.tag.name }}</span>
+	    {% endfor %}
+	{% endif %}
+
+    {% endif %}
+{% endif %}

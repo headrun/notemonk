@@ -1,0 +1,98 @@
+{% extends "ui/base.html" %}
+{% load tags %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+
+<div class="grid_11 alpha">
+    <br/>
+</div>
+
+<div class="grid_11 alpha login">
+
+    <div class="grid_5 alpha">
+        <div class="grid_5 alpha form">
+            <div><h2 style="margin:0px;color:#0093CC">Login</h2></div>
+            <form action="/login/" method="POST">
+                <input type="hidden" name="ref_path" value="{{ next }}" />
+                <table id="login-form">
+                    <tr>
+                        <td>
+                            <label for="id_username">Username:</label>
+                        </td>
+                        <td>
+                            {{ form.username }}{{ form.username.errors }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="id_password">Password:</label>
+                        </td>
+                        <td>
+                            {{ form.password }}{{ form.password.errors }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                        </td>
+                        <td>
+                            <span style="float:left">{{ form.persistent }}</span>
+                            <label style="float:left" for="id_Stay signed in">Stay signed in</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input style="width:65px;height:25px" type="submit" value="Sign In"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><a href='{% url socialauth_begin "facebook" %}'><img style='vertical-align:bottom' src='/static/images/fblogin.png'/></a></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <a href="/accounts/password/reset/"/>Forgot Password?</a>
+                        </td>
+                    </tr>
+
+                </table>
+            </form>
+        </div>
+    </div>
+
+    <div class="grid_1">(or)</div>
+
+    <div class="grid_5 omega" style="text-align:center">
+        <big>
+            <big>
+                <a href="/accounts/register/"><strong>Join</strong></a> Notemonk now!
+            </big>
+        </big>
+        <br/>
+        It is easy and hardly takes a few seconds.
+    </div>
+</div>
+
+<div class="grid_11 alpha omega"><br></div>
+Become a Top Member
+<br>
+   
+{% for f in top_users|slice:'17' %}
+    {% render f 'image,-text' %}
+{% endfor %}
+
+{% endblock content %}
+
+{% block sidebar %}
+<div class="subtitle">&nbsp;&nbsp;&nbsp;Why Login?</div>
+<ul>
+    <li><strong>Get answers</strong> for your questions in your inbox.
+    <li><strong>Stay up-to-date</strong> on new books, notes, videos, questions and answers.
+    <li><strong>Make friends</strong>, find monks or collect followers.
+    <li><strong>Earn points</strong> and grow your status to win exciting prizes.
+</ul>
+{% endblock %}

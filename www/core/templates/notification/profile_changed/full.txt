@@ -1,0 +1,3 @@
+{{user.get_profile.title}} updated {% ifequal user.get_profile.sex "M" %}his{% else %}her{% endifequal %} profile.
+
+See it at http://{{ current_site }}{{ user.get_profile.link }}

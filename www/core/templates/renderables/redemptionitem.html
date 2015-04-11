@@ -1,0 +1,39 @@
+{% load tags %}
+{% load filters %}
+
+{% if not flags.is_more %}
+
+    {% if flags.is_image %}
+    <div style="float: left;">
+        <a href="{{ obj.item.link }}">
+            <img src="{{ obj.item.image|thumbnail:'100x100' }}"/>
+        </a>&nbsp;&nbsp;&nbsp;
+    </div>
+    {% endif %}
+    <a href="{{ obj.item.link }}">
+        {{ obj.item.title }}
+    </a>
+
+{% else %}
+
+    <div style="float: left;">
+        <a href="{{ obj.item.link }}">
+            <img src="{{ obj.item.image|thumbnail:'100x100' }}"/>
+        </a>&nbsp;&nbsp;&nbsp;
+    </div>
+
+    <div style="padding: 5px;">
+        <a href="{{ obj.item.link }}">
+            <span class="subtitle">{{ obj.item.title }}</span>
+        </a>
+        <br/>
+
+        <big><strong>{{ obj.num }}</strong></big>
+        <br/>
+
+        {{ obj.item.description }}
+    </div>
+
+{% endif %}
+
+

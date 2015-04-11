@@ -1,0 +1,19 @@
+{% extends "ui/user_base.html" %}
+
+{% load filters %}
+{% load tags %}
+
+{% block content %}
+     <div class="grid_11 alpha"><br/></div>
+    {% render profilepost.user.get_profile %}
+    {% ifequal profilepost.user profilepost.target.user %}
+            {{ profilepost.text }}
+        {% else %}
+            > <a href="{{ profilepost.target.user.get_profile.link }}">{{ profilepost.target.user.get_profile.title }}</a>: {{ profilepost.text }}
+        {% endifequal %}
+
+        <br>
+        {{ profilepost.date_added|dt }}
+        {% rate profilepost %}
+        {% comment profilepost 'image,commentbox' %}
+{% endblock content %}

@@ -1,0 +1,56 @@
+{% load filters %}
+{% load tags %}
+
+<script>
+function showOriginal()
+{
+    if ('True' == '{{ user.is_anonymous }}')
+    {
+        window.location="/login/?next={{ ref_path }}" 
+    }
+    else
+    {
+        window.setTimeout(function(){
+            $('#add_question').hide();
+            $('#question_add_form').show();
+            $('#{{ markup_widget_id }}').focus();}, 100);
+    }
+}
+</script>
+{% if target.questions.count and num_questions %}
+
+    <span class="subtitle" style="margin-bottom:10px">Questions</span>
+    {% if target.questions.count|gt:num_questions %}
+        <span><a href="/questions/{{target.ctype.id}}/{{target.id}}/{{target.title}}/" >more&hellip;</a></span>
+    {% endif %}
+
+    <div>
+        {% for question in questions %}
+        {% render question 'more' %}
+        <div class="hrdiv"></div>
+        {% endfor %}
+    </div>
+
+{% endif %}
+
+{% ifnotequal target user.get_profile %}
+<div id="add_question">
+    <textarea class="default_text" rows="1" style="width: 635px;min-height:25px" onfocus="showOriginal();" title="Ask any question about {{ topic }}..."></textarea>
+<br/>
+</div> 
+
+<div id="question_add_form" style='display: none'>
+<form action="/qa/question/" method="POST">
+    <input type="hidden" name="ref_path" value="{{ ref_path }}">
+    <input type="hidden" name="target_type" value="{{ target.ctype.id }}">
+    <input type="hidden" value="{{ target.id }}" name="target">
+    <textarea class="elastic" id="{{ markup_widget_id }}" rows="3" style="width: 90%" name="question_text"></textarea>
+    <br/>
+    <div align="right"><input type="submit" value="Ask"></div>
+</form>
+{% markup markup_widget_id '' %}
+</div>
+
+{% endifnotequal %}
+
+

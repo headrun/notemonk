@@ -1,0 +1,26 @@
+{% extends "ui/base.html" %}
+
+{% block title %}
+
+<div class="grid_11 alpha">
+    <span class="title">Moderation request sent</span>&nbsp;
+</div>
+
+{% endblock title %}
+
+{% block content %}
+
+<div class="grid_11 alpha"><br/></div>
+
+<p>
+    I have sent your request to the owner of the book -- <a href="{{ owner.get_profile.link }}">{{ owner.get_profile.title  }}</a>. As soon as they approve, you will receive a notification by mail.
+<p>
+
+<p>
+    You can <a href="{{ book.link }}">go back to the book</a> to continue browsing.
+</p>
+
+{% endblock content %}
+
+{% block sidebar %}
+{% endblock sidebar %}

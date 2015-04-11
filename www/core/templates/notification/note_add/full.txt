@@ -1,0 +1,9 @@
+{{note.user.get_profile.title}} added note for
+
+"{{note.target.title}}"
+
+Note:
+{{ note.text.raw }}
+
+To add your note for this click here:
+http://{{ current_site }}{{note.target.link}}

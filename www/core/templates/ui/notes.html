@@ -1,0 +1,54 @@
+{% extends "ui/base.html" %}
+
+{% load tags %}
+{% load filters %}
+
+{% block content %}
+
+<div class="grid_16">
+    <div class="grid_11 alpha">
+        <span class="title">Notes</span> for <span class="title"><a href="{{ target.link }}">{{target.title}}</a></span>
+    </div>
+</div>
+
+<div class="grid_11 alpha"><br/></div>
+
+<div class="grid_11 alpha">
+    {% for note in notes.object_list %}
+
+    <div class="note_block">
+        <div class="note">
+            {{ note.text }}
+            <div align="right" class="light">
+                {% rate note %} {% flag note %}
+                by {% render note.user.get_profile %}
+                for {% render note.target '-dateadded' %}
+                added {{ note.date_added|dt }}
+            </div>
+        </div>
+    </div>
+
+    <br/>
+
+    {% endfor %}
+</div>
+
+<div class="grid_11 alpha">
+    {% paginator notes paging_url %}
+</div>
+
+<div class="grid_11 alpha"><br/></div>
+
+{% endblock content %}
+
+{% block sidebar %}
+    <div class="grid_5 alpha" style="margin-left:-10px">
+       <!-- End: adBrite -->
+        <div id='div-gpt-ad-1319891242082-0' style='width:300px; height:250px;'>
+            <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1319891242082-0'); });
+            </script>
+        </div>
+    </div>
+
+{% endblock sidebar %}

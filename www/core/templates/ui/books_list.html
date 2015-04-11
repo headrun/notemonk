@@ -1,0 +1,67 @@
+{% extends "ui/base.html" %}
+
+{% load tags %}
+
+{% block title %}
+<center><span class="title">
+{{ page_title }}
+</span></center>
+{% endblock title %}
+
+{% block content %}
+
+<div class="grid_11 alpha">
+
+    <div class="grid_11 alpha"><br/></div>
+
+    {% for book in books.object_list %}
+
+    <div class="grid_10 alpha omega book-rack">
+        <div style="float: left;">
+            {% render book 'image,-text,more' %}
+        </div>
+
+        <div style="padding: 5px;">
+            <a href="{{ book.link }}">
+                <span class="subtitle">{{ book.title }}</span>
+            </a>
+
+            ({% rate book %}, 
+            {% follow book %}, 
+            {% flag book %})
+
+            <br/><br/>
+            {% if book.isbn %}ISBN: {{ book.isbn }}<br/>{% endif%}
+
+            {% for t in book.tags.all %}
+                <span class="tag"><a href="/books/tag/all/{{ t.tag.name }}">{{ t.tag.name }}</a></span>
+            {% endfor %}
+        
+        </div>
+    </div>
+
+    <div class="grid_11 alpha"><br/></div>
+
+    {% endfor %}
+
+    <div class="grid_11 alpha">
+        {% paginator books paging_url %}
+    </div>
+    
+</div>
+
+{% endblock content %}
+
+{% block sidebar %}
+
+    <div class="grid_5 alpha" style="margin-left:-10px">
+
+        <!-- medium_rectangle -->
+        <div id='div-gpt-ad-1319891242082-0' style='width:300px; height:250px;'>
+        <script type='text/javascript'>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1319891242082-0'); });
+        </script>
+        </div>
+
+    </div>
+{% endblock sidebar %}

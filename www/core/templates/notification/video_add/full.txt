@@ -1,0 +1,10 @@
+{{user.get_profile.title}} added video
+
+"{{video.title}}"
+
+to
+
+"{{video.target.title}}"
+
+See it here:
+http://{{ current_site }}{{video.link}}

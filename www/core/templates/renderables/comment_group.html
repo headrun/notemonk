@@ -1,0 +1,23 @@
+{% extends "renderables/group_base.html" %}
+
+{% load tags %}
+{% load filters %}
+
+{% block digest %}
+    <div class="grid_1 alpha">
+        {% render target.user.get_profile 'image,-text,more' %}
+    </div>
+
+    <div class="grid_9 omega" style="padding:0px 10px;">
+        {% if target|cname == 'ProfilePost' %}
+            {% render target 'more,comment' %}
+        {% else %}
+            {% render target 'more' %}
+            {% comment target 'image,commentbox' %}
+        {% endif %}
+    </div>
+ 
+{% endblock digest %}
+
+{% block activities %}
+{% endblock activities %}

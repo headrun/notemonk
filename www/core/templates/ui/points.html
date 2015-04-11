@@ -1,0 +1,64 @@
+{% extends "ui/base.html" %}
+
+{% load filters %}
+{% load tags %}
+
+{% block title %}
+    <div class="grid_11 alpha">
+        <span class="title">Points</span> for <span class="title"><a href="/user/{{history_user.username}}">{{history_user.get_profile.title}}</a></span>
+    </div>
+{% endblock title %}
+
+{% block content %}
+
+    <div class="grid_11 alpha">
+
+        <!-- Spacing -->
+        <div class="grid_11 alpha">
+            <br/>
+        </div>
+
+        {% for record in history.object_list  %}
+
+            {% if record.as_text %}
+
+            <div class="grid_11 alpha video_block">
+                <div style="float:left; padding: 5px;">
+                    <span>
+                    {% if record.points|gt:"0" %}
+                    +
+                    {% endif %}
+                    {{ record.points }}
+                    {{ record.as_text|safe }},
+                    {{ record.time|dt }}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Spacing -->
+            <div class="grid_11 alpha">
+                <br/>
+            </div>
+
+            {% endif %}
+
+        {% endfor %}
+
+    </div>
+
+    <div class="grid_11 alpha">
+        {% paginator history paging_url %}
+    </div>
+
+{% endblock content %}
+{% block sidebar %}
+    <div class="grid_5 alpha" style="margin-left:-10px">
+       <!-- End: adBrite -->
+        <div id='div-gpt-ad-1319891242082-0' style='width:300px; height:250px;'>
+            <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1319891242082-0'); });
+            </script>
+        </div>
+    </div>
+
+{% endblock sidebar %}

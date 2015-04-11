@@ -1,0 +1,68 @@
+{% load tags %}
+{% load filters %}
+{% if flags.is_instream%}
+   <div style="display:table;">
+    <div style="display:table-row"> 
+      <div style="display:table-cell">
+      <a href="/video/{{ obj.id }}/{{ obj.media.title }}/" style="text-decoration: none;">
+        <img alt="{{ obj.media.title }}"
+             src="http://i2.ytimg.com/vi/{{ obj.media.source_id }}/default.jpg"
+             rel="videoimg_{{ obj.media.id }}" class="{% if flags.is_overlay %}captify{% endif %} video_thumb"/>
+      </a>
+      </div>
+      <div style="display:table-cell;vertical-align:top;padding-left:5px">
+      <a href="{{ obj.link }}">{{ obj.title|truncatesmart:'50' }}</a>
+      </div>
+    </div>
+  </div>
+{% else  %}
+ {% if flags.is_image %}
+    <a href="/video/{{ obj.id }}/{{ obj.media.title }}/" style="text-decoration: none;">
+        <img alt="{{ obj.media.title }}"
+             src="http://i2.ytimg.com/vi/{{ obj.media.source_id }}/default.jpg"
+             rel="videoimg_{{ obj.media.id }}" class="{% if flags.is_overlay %}captify{% endif %} video_thumb"/>
+    </a>
+    {% if flags.is_overlay %}
+    <div id="videoimg_{{ obj.media.id }}">
+        <a href="/video/{{ obj.id }}/{{ obj.media.title }}/" class="thumblink">
+            {{ obj.media.title|truncatewords:5 }}
+        </a>
+    </div>
+    {% endif %}
+ {% endif %}
+
+ {% if flags.is_text %}
+    {% if not flags.is_more %}
+
+        <a href="{{ obj.link }}">{{ obj.title|truncatesmart:'50' }}</a>
+        {% if flags.is_dateadded %}
+        {{ obj.date_added|dt }}
+        {% endif %}
+
+    {% else %}
+        
+        <a href="{{ obj.link }}">{{ obj.title }}</a>
+
+        {% if flags.is_rate %}
+            {% rate obj %}
+        {% endif %}
+       
+        {% if flags.is_flag %}
+            {% flag obj %}
+        {% endif %}
+        
+        {% if flags.is_context %}
+            for <a href="{{ obj.target.link }}" title="{{ obj.target.title }}">{{ obj.target.title|truncatesmart:'25' }}</a>
+        {% endif %}
+
+        {% if flags.is_addedby %}
+            added by {% render obj.user.get_profile %}
+        {% endif %}
+
+        {% if flags.is_dateadded %}
+        {{ obj.date_added|dt }}
+        {% endif %}
+
+    {% endif %}
+ {% endif %}
+{% endif %}

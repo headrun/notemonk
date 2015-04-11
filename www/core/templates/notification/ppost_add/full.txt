@@ -1,0 +1,10 @@
+{{ post.user.get_profile.title}} posted
+
+"{{ post.text }}"
+
+on
+
+"{{ post.profile.title }}"'s page
+
+To comment or see, click here:
+http://{{ current_site }}{{ post.link }}

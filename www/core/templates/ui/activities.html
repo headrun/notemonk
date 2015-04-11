@@ -1,0 +1,36 @@
+{% extends "ui/base.html" %}
+
+{% load filters %}
+{% load tags %}
+
+{% block content %}
+    {% for item in stream %}
+    <div class="grid_11 alpha stream">
+        {% render item 'more,-flag,-addedby,context' %}
+    </div>
+    {% endfor %}
+
+    {% if next_id != None %}
+    <div class="grid_11 alpha slight-emphasize">
+        <center>
+            <big>
+                <strong>
+                    <a href="/activities/all/{{ next_id }}/">More ...</a>
+                </strong>
+            </big>
+        <center>
+    </div>
+    {% endif %}
+{% endblock content %}
+
+{% block sidebar %}
+    <div class="grid_5 alpha" style="margin-left:-10px">
+       <!-- End: adBrite -->
+        <div id='div-gpt-ad-1319891242082-0' style='width:300px; height:250px;'>
+            <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1319891242082-0'); });
+            </script>
+        </div>
+    </div>
+
+{% endblock sidebar %}

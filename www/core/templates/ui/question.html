@@ -1,0 +1,89 @@
+{% extends "ui/base.html" %}
+{% load tags %}
+{% load filters %}
+
+
+{% block title %}
+<div class="grid_11 alpha" style="margin:5px">
+    <div class="light" style="width: 50px;float: left;font-weight: bold; font-size: 34px;">Q</div>
+    <div class="grid_10 alpha">
+        <big><strong>{{ question.text }}</strong></big>
+        <span>{% rate question %}, </span>
+        <span>{% flag question %}</span>, 
+        <span>under <a href="{{ question.target.link }}">{{ question.target.title|truncatewords:5 }}</a></span>
+        <span>by {% render question.user.get_profile %}</span>,
+        added {{question.date_added|dt}}
+        {% comment question %}
+    </div>    
+</div>
+
+{% endblock title %}
+
+{% block content %}
+
+<div class="grid_11 alpha"><br/></div>
+
+<!-- Answers -->
+<div class="grid_11 alpha" style="padding:5px;">
+
+    {% if question.answer_set.all %}
+
+    <div class="grid_11 alpha">
+        <big><strong>{{ question.answer_set.count }} answer{{ question.answer_set.count|pluralize }}</strong></big>
+        <div class="hrdiv"></div>
+        <div class="grid_11 alpha"><br/></div>
+
+        {% for answer in question.answer_set.all %}
+            <div class="grid_11 alpha">
+            <div class="light" style="width: 50px;float: left;font-weight: bold; font-size: 34px;">A</div>
+            <div class="grid_10 alpha">
+            {% render answer 'more' %}
+            {% comment answer %}
+            </div>
+            </div>
+
+            <div class="grid_11 alpha"><br/></div>
+        {% endfor %}
+    </div>
+
+    {% endif %}
+</div>
+
+<div class="grid_11 alpha"><br/></div>
+
+<div class="grid_11 alpha">
+    <div id="add_answer_{{ answer_text_id }}">
+        <textarea class="default_text" rows="1" style="width: 100%" onfocus="expandtextarea('#add_answer_{{ answer_text_id }}', '#answer_add_form_{{ answer_text_id }}', '#{{ answer_text_id }}', '{{ user.is_anonymous }}', '{{ ref_path }}');" title="Answer..."></textarea>
+    </div> 
+
+    <div id="answer_add_form_{{ answer_text_id }}" class="grid_11 alpha" style="display: none">
+        <form action="/qa/answer/" method="POST">
+            <input type="hidden" name="ref_path" value="{{ ref_path }}">
+            <input type="hidden" value="{{ question.id }}" name="q_id">
+            <textarea rows="3" style="width: 90%" class="elastic" id="{{ answer_text_id }}" name="answer_text"></textarea>
+            <div align="right"><input type="submit" value="Answer"></div>
+        </form>
+    </div>
+    {% markup answer_text_id '' %}
+</div>
+
+{% endblock content %}
+
+{% block sidebar %}
+
+    <div class="grid_5 omega gad">
+
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-2945383363046281";
+        /* 300 x 250, notemonk box listing page bottom */
+        google_ad_slot = "9649030723";
+        google_ad_width = 300;
+        google_ad_height = 250;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+
+    </div>
+{% endblock sidebar %}

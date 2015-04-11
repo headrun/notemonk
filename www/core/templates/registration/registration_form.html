@@ -1,0 +1,44 @@
+{% extends "ui/base.html" %}
+
+{% block title %}
+
+<div class="grid_11 alpha">
+    <span class="title">Become a part of the Notemonk community</span>&nbsp;
+</div>
+
+{% endblock title %}
+
+{% block content %}
+
+<!-- spacing -->
+<div class="grid_11 alpha">
+    <br/>
+</div>
+
+<div class="grid_11 alpha">
+
+<div class="form">
+    <form action="/accounts/register/" method="POST">
+            <table>
+                {{ form.as_table }}
+            </table>
+
+            <div align="center">
+                <br/>
+                <input style="height:30px" type="submit" value="Join Notemonk"/>
+            </div>
+    </form>
+</div>
+
+</div>
+
+{% endblock content %}
+
+{% block sidebar %}
+    <div class="subtitle">Why Join?</div>
+    <ul>
+        <li> <strong>Rate</strong> your favorite videos
+        <li> <strong>Store notes</strong> for quick reference
+        <li> <strong>Experience</strong> the full depth of Notemonk
+    </ul>
+{% endblock sidebar %}

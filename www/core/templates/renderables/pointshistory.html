@@ -1,0 +1,38 @@
+{% load filters %}
+{% load tags %}
+
+<span style="float: left; font-size: 300%; font-weight:bold; padding-right: 10px;" class="light">
+{{ obj.signed_points }}
+</span>
+
+for {{ obj.verb }} {% if obj.target %}{% render obj.target '-dateadded' %}{% endif %}
+{% if flags.is_more %}
+    <br/>
+    {% ifequal obj.code 'rated' %}
+        <span class="slight-emphasize" style="line-height: 2;" title="{{ obj.target.up_count }} liked, {{ obj.target.down_count }} disliked (total {{ obj.target.tot_count }}). {{ obj.user.get_profile.title }} {{ obj.get_rating.verb }}. {{ obj.user.get_profile.title }} was {{ obj.edata.position|add:1|nth }} to vote (voting level is {{ obj.edata.rated_at_level }}). {{ obj.target.tot_count }} total votes (current voting level is {{ obj.edata.current_level }}). Level difference multiplier is {{ obj.edata.level_diff }}.">
+            <span>{{ obj.signed_points }}</span>
+            &nbsp;
+            =
+            &nbsp;
+            <span>
+            {{ obj.sign }}1 <small>(voting result)</small>
+            </span>
+            &nbsp;
+            *
+            &nbsp;
+            <span>
+            {{ obj.edata.level_diff }} <small>(level diff)</small>
+            </span>
+            {% if obj.is_for_adding %}
+            &nbsp;
+            *
+            &nbsp;
+            <span>
+            {{ obj.edata.rating_multiplier }} <small>(item owner bonus)</small>
+            </span>
+            {% endif %}
+        </span>
+    {% endifequal %}
+	<div> {{ obj.date_added|dt }}</div>
+
+{% endif %}

@@ -1,0 +1,60 @@
+{% extends "ui/base.html" %}
+
+{% load tags %}
+{% block content %}
+
+<div class="grid_16">
+    <div class="grid_11 alpha">
+        <span class="title">Questions</span> for <span class="title"><a href="{{ target.link }}">{{target.title}}</a></span>
+    </div>
+</div>
+
+<!-- Spacing -->
+<div class="grid_11 alpha">
+    <br/>
+</div>
+
+<div class="grid_11">
+    {% for question in questions.object_list %}
+
+    <div class="question_block">
+        <a href="/qa/question/{{ question.id }}/{{ question.text }}/">{{ question.text }}</a>
+        <span>{{ question.answer_set.count }}</span> answers.
+        <br/>
+
+        {% for answer in question.answer_set.all|slice:"3" %}
+        <div class="answer">
+            {{ answer.text }}
+        </div>
+        {% endfor %}
+
+        <br/>
+    </div>
+
+    {% endfor %}
+</div>
+
+<div class="grid_11">
+    {% paginator questions paging_url %}
+</div>
+
+<!-- Spacing -->
+<div class="grid_11 alpha">
+    <br/>
+</div>
+
+{% question target target.title 0 %}
+
+{% endblock content %}
+
+{% block sidebar %}
+    <div class="grid_5 alpha" style="margin-left:-10px">
+       <!-- End: adBrite -->
+        <div id='div-gpt-ad-1319891242082-0' style='width:300px; height:250px;'>
+            <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1319891242082-0'); });
+            </script>
+        </div>
+    </div>
+
+{% endblock sidebar %}
