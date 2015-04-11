@@ -1,0 +1,13 @@
+*.swi
+*.swj
+*.swk
+*.swl
+*.swm
+*.swn
+*.swo
+*.swp
+*.svn-base
+*.pyc
+*.svn/entries
+*.svn/*
+.www/core/migrations/
